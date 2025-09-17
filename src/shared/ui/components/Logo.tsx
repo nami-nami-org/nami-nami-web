@@ -4,7 +4,7 @@ interface Props extends HtmlHTMLAttributes<HTMLOrSVGElement> {
   size?: number
 }
 
-const LogoBg: FC<Props> = ({ size = 30, ...props }) => {
+const Logo: FC<Props> = ({ size = 30, ...props }) => {
   return (
     <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30' width={size} height={size} fill='none' {...props}>
       <rect width='30' height='30' fill='#E9493B' rx='1000' />
@@ -16,4 +16,4 @@ const LogoBg: FC<Props> = ({ size = 30, ...props }) => {
   )
 }
 
-export default LogoBg
+export default Logo
