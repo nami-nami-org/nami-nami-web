@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 
 bun lint-staged
-bun build
+bun next build --turbopack
