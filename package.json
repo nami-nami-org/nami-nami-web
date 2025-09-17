@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack --port 4321",
+    "dev": "rimraf .next && pnpm store prune && next dev --turbopack --port 4321",
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
@@ -18,7 +18,7 @@
       "format"
     ],
     "./public/*.{js,jsx,ts,tsx,json,css,md}": [
-      "eslint --fix"
+      "format"
     ]
   },
   "dependencies": {
@@ -31,7 +31,8 @@
     "nextjs-toploader": "3.8.16",
     "prettier-plugin-tailwindcss": "0.6.14",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "rimraf": "^6.0.1"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^19.8.1",
