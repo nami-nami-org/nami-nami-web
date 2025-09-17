@@ -1,0 +1,52 @@
+@import 'tailwindcss';
+
+@theme {
+  --bg1: var(--bg1);
+  --bg2: var(--bg2);
+  --bg3: var(--bg3);
+  --fn1: var(--fn1);
+  --fn2: var(--fn2);
+  --fnA: var(--fnA);
+  --tn1: var(--tn1);
+  --tn2: var(--tn2);
+  --font-roboto: var(--font-roboto);
+  --font-instrument: var(--font-instrument);
+  --font-emojis: var(--font-emojis);
+}
+
+:root {
+  --bg1: oklch(98.11% 0.05 60.18);
+  --bg2: oklch(100% 0 0);
+  --bg3: oklch(81.99% 0.09 51.58);
+  --fn1: oklch(19.99% 0.02 63.07);
+  --fn2: oklch(43.79% 0.04 63.88);
+  --fnA: oklch(94.97% 0.02 50.41);
+  --tn1: oklch(59.19% 0.19 33.64);
+  --tn2: oklch(67.54% 0.08 61.16);
+}
+
+[data-theme='dark'],
+html.dark {
+  --bg1: oklch(14.07% 0.02 63.07);
+  --bg2: oklch(10.66% 0.02 63.07);
+  --bg3: oklch(24.57% 0.05 60.18);
+  --fn1: oklch(90.17% 0.05 60.18);
+  --fn2: oklch(64.12% 0.05 60.18);
+  --fnA: oklch(20.44% 0.02 63.07);
+  --tn1: oklch(59.19% 0.19 33.64);
+  --tn2: oklch(67.54% 0.08 61.16);
+}
+
+body {
+  font-family:
+    var(--font-roboto) var(--font-emojis) Arial,
+    Helvetica,
+    sans-serif;
+  background-color: var(--bg1);
+  color: var(--fn1);
+}
+
+::selection {
+  background-color: var(--tn1);
+  color: var(--fnA);
+}
