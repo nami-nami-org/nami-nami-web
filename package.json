@@ -11,8 +11,7 @@
     "husky:init": "husky init",
     "format": "prettier --check .",
     "format:fix": "prettier --write --list-different .",
-    "prepare": "husky",
-    "test": "bun format:fix && bun lint:fix"
+    "prepare": "husky"
   },
   "lint-staged": {
     "./src/*.{js,jsx,ts,tsx,json,css,md}": [
