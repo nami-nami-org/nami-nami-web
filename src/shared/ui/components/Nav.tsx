@@ -10,24 +10,24 @@ const Nav: FC = () => {
     <header className='m-w-[500px] flex w-full items-center justify-between'>
       <div className='flex items-center space-x-2'>
         <Logo />
-        <h4 className='text-[12px] font-bold'>
+        <h4 className=' text-gray-900 text-[12px] font-bold'>
           Ñami <br /> Nami
         </h4>
       </div>
       <nav className='hidden space-x-8 md:flex'>
-        <Link href='#' className='text-fn2 hover:text-fn1 flex items-center space-x-2 transition-colors duration-300'>
+        <Link href='#' className='text-gray-900 hover:text-red-500 flex items-center space-x-2 transition-colors duration-300'>
           <HomeIcon />
           <span>Inicio</span>
         </Link>
-        <Link href='#' className='text-fn2 hover:text-fn1 flex items-center space-x-2 transition-colors duration-300'>
+        <Link href='#' className='text-gray-900 hover:text-fn1 flex items-center space-x-2 transition-colors duration-300'>
           <Utensils />
           <span>Platillos</span>
         </Link>
-        <Link href='#' className='text-fn2 hover:text-fn1 flex items-center space-x-2 transition-colors duration-300'>
+        <Link href='#' className='text-gray-900 hover:text-fn1 flex items-center space-x-2 transition-colors duration-300'>
           <Store />
           <span>Restaurantes</span>
         </Link>
-        <Link href='#' className='text-fn2 hover:text-fn1 flex items-center space-x-2 transition-colors duration-300'>
+        <Link href='#' className='text-gray-900 hover:text-fn1 flex items-center space-x-2 transition-colors duration-300'>
           <Leaf />
           <span>Veganos</span>
         </Link>
