@@ -1,47 +1,62 @@
 @import 'tailwindcss';
 
-@theme {
-  --bg1: var(--bg1);
-  --bg2: var(--bg2);
-  --bg3: var(--bg3);
-  --fn1: var(--fn1);
-  --fn2: var(--fn2);
-  --fnA: var(--fnA);
-  --tn1: var(--tn1);
-  --tn2: var(--tn2);
-  --font-roboto: var(--font-roboto);
-  --font-instrument: var(--font-instrument);
-  --font-emojis: var(--font-emojis);
-}
-
 :root {
-  --bg1: oklch(98.11% 0.05 60.18);
-  --bg2: oklch(100% 0 0);
-  --bg3: oklch(81.99% 0.09 51.58);
-  --fn1: oklch(19.99% 0.02 63.07);
-  --fn2: oklch(43.79% 0.04 63.88);
-  --fnA: oklch(94.97% 0.02 50.41);
-  --tn1: oklch(59.19% 0.19 33.64);
-  --tn2: oklch(67.54% 0.08 61.16);
+  --bg1: oklch(100% 0.00011 271.152);
+  --bg2: oklch(96.248% 0.00294 307.138);
+  --bg3: oklch(90.975% 0.0001 271.152);
+  --fn1: oklch(28.61% 0.0313 82.724);
+  --fn2: oklch(47.612% 0.02906 89.304);
+  --fnA: oklch(95.823% 0.02231 45.412);
+  --tn1: oklch(63.065% 0.19884 28.914);
+  --tn2: oklch(72.561% 0.0882 65.091);
 }
 
 [data-theme='dark'],
 html.dark {
-  --bg1: oklch(14.07% 0.02 63.07);
-  --bg2: oklch(10.66% 0.02 63.07);
-  --bg3: oklch(24.57% 0.05 60.18);
-  --fn1: oklch(90.17% 0.05 60.18);
-  --fn2: oklch(64.12% 0.05 60.18);
-  --fnA: oklch(20.44% 0.02 63.07);
-  --tn1: oklch(59.19% 0.19 33.64);
-  --tn2: oklch(67.54% 0.08 61.16);
+  --bg1: oklch(15% 0.003 270);
+  --bg2: oklch(20% 0.004 280);
+  --bg3: oklch(25% 0.005 290);
+  --fn1: oklch(92% 0.01 95);
+  --fn2: oklch(80% 0.015 95);
+  --fnA: oklch(95% 0.03 45);
+  --tn1: oklch(70% 0.2 28.914);
+  --tn2: oklch(75% 0.1 65.091);
+}
+
+@theme {
+  --color-bg1: var(--bg1);
+  --color-bg2: var(--bg2);
+  --color-bg3: var(--bg3);
+  --color-fn1: var(--fn1);
+  --color-fn2: var(--fn2);
+  --color-fnA: var(--fnA);
+  --color-tn1: var(--tn1);
+  --color-tn2: var(--tn2);
+  --font-roboto: var(--font-roboto);
+  --font-instrument: var(--font-instrument);
+  --font-emojis: var(--font-emojis);
+  --text-h1: 2rem; /* 32px */
+  --text-h2: 1.5rem; /* 24px */
+  --text-h3: 1.25rem; /* 20px */
+  --text-h4: 1rem; /* 16px */
+  --text-h5: 0.875rem; /* 14px */
+  --text-h6: 0.75rem; /* 12px */
+  --text-p: 1rem; /* 16px */
+  --text-a: 1rem; /* 16px */
+  --text-span: 0.8rem; /* 14px */
+  --breakpoint-middle: 54rem;
+}
+
+html {
+  font-size: 14px;
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }
 
 body {
-  font-family:
-    var(--font-roboto) var(--font-emojis) Arial,
-    Helvetica,
-    sans-serif;
+  font-family: var(--font-roboto), var(--font-emojis), Arial, Helvetica, sans-serif;
   background-color: var(--bg1);
   color: var(--fn1);
 }
@@ -53,7 +68,67 @@ body {
 
 .lucide {
   display: block;
-  width: 18px;
-  height: 18px;
-  stroke-width: 1.5;
+  width: 22px;
+  height: 22px;
+  stroke-width: 2;
+}
+
+/* Headings */
+h1 {
+  font-size: var(--text-h1);
+  font-weight: bold;
+}
+
+h2 {
+  font-size: var(--text-h2);
+}
+
+h3 {
+  font-size: var(--text-h3);
+}
+
+h4 {
+  font-size: var(--text-h4);
+}
+
+h5 {
+  font-size: var(--text-h5);
+}
+
+h6 {
+  font-size: var(--text-h6);
+}
+
+p,
+input,
+textarea,
+select {
+  font-size: var(--text-p);
+}
+
+span {
+  font-size: var(--text-span);
+}
+
+p + p {
+  margin-top: 1rem;
+}
+
+a {
+  font-size: var(--text-a);
+  text-decoration: none;
+}
+
+label {
+  font-size: var(--text-h6);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+button {
+  cursor: pointer;
 }

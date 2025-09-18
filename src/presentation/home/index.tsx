@@ -1,4 +1,3 @@
-import Nav from '@/shared/ui/components/Nav'
 import type { FC, ReactNode } from 'react'
 
 interface Props {
@@ -7,10 +6,8 @@ interface Props {
 
 const Home: FC<Props> = ({}) => {
   return (
-    <main className='h-dvh w-dvw flex-col items-center'>
-      <Nav />
-
-      <p>Home</p>
+    <main className='h-full w-full flex-1'>
+      <h1 className='font-instrument text-center italic'>Home</h1>
     </main>
   )
 }
