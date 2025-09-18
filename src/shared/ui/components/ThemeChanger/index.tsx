@@ -8,7 +8,7 @@ const ThemeChanger = dynamic(() => import('./ThemeChanger'), {
   loading: () => {
     return (
       <div className='flex items-center justify-center p-2.5'>
-        <LoaderIcon className='text-fn2 animate-spin' size={18} />
+        <LoaderIcon className='text-fn2 animate-spin' />
       </div>
     )
   }

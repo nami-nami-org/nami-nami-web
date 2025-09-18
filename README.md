@@ -24,11 +24,45 @@ Impulsar la digitalización de los restaurantes locales para que puedan:
 
 ## 📂 Estructura del Proyecto
 
+**Más información**: [Folders.md](./Folders.md)
+
 ```
-
-├─ /public        # Imágenes, iconos y assets
-└─ README.md      # Documentación del proyecto
-
+src/
+├─ app/                        # Next.js (rutas, layouts, metadata)
+│  ├─ layout.tsx               # Usa shared/config/metadata.ts
+│  ├─ page.tsx
+│  └─ globals.css
+│
+├─ core/                       # Lógica independiente
+│  ├─ repositories/            # Interfaces de repositorios
+│  ├─ types/                   # Tipos TS globales
+│  ├─ services/                # Casos de uso (reciben repositorios como dependencia)
+│  ├─ hooks/                   # Hooks genéricos (ej. tanstack query)
+│  ├─ utils/                   # Helpers puros
+│  ├─ api/                     # Cliente HTTP (axios).
+│  └─ constants/               # Constantes globales (URLs base, etc).
+│
+├─ infrastructure/             # Implementaciones concretas
+│  └─ persistence/             # Caché, localStorage, etc.
+│
+├─ presentation/               # Módulos específicos de dominio (usuario, restaurante, etc.).
+│  ├─ usuario/
+│  │  ├─ components/
+│  │  ├─ hooks/
+│  │  ├─ pages/
+│  │  └─ types/
+│  └─ restaurante/
+│     ├─ components/
+│     ├─ hooks/
+│     ├─ pages/
+│     └─ types/
+│
+├─ shared/                     # Recursos globales y reutilizables.
+│  ├─ ui/
+│  │  ├─ components/           # Componentes genéricos (ej: Button, Modal).
+│  │  └─ assets/               # Fuentes, iconos, imágenes
+│  └─ config/
+│     └─ metadata/             # Metadatos globales
 ```
 
 ---

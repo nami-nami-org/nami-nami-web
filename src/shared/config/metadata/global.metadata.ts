@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-export const metadata: Metadata = {
+export const globalMetadata: Metadata = {
   metadataBase: new URL('https://ñamiñami.vercel.app'),
   authors: [{ name: 'Ñami Ñami', url: 'https://ñamiñami.vercel.app' }],
   creator: 'Ñami Ñami org',

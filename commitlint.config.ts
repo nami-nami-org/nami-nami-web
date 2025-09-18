@@ -8,7 +8,8 @@ const config = {
   rules: {
     'type-empty': [2, 'never'],
     'subject-empty': [2, 'never'],
-    'emoji-in-subject': [2, 'always']
+    'emoji-in-subject': [2, 'always'],
+    'header-max-length': [2, 'always', 200]
   },
 
   plugins: [
