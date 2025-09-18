@@ -5,7 +5,10 @@ const nextConfig: NextConfig = {
 	reactStrictMode: true,
 	experimental: {
 		viewTransition: true
-	}
+	},
+	images: {
+		domains: ['img.freepik.com']
+  	}
 }
 
 export default nextConfig
