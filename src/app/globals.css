@@ -1,19 +1,5 @@
 @import 'tailwindcss';
 
-@theme {
-  --bg1: var(--bg1);
-  --bg2: var(--bg2);
-  --bg3: var(--bg3);
-  --fn1: var(--fn1);
-  --fn2: var(--fn2);
-  --fnA: var(--fnA);
-  --tn1: var(--tn1);
-  --tn2: var(--tn2);
-  --font-roboto: var(--font-roboto);
-  --font-instrument: var(--font-instrument);
-  --font-emojis: var(--font-emojis);
-}
-
 :root {
   --bg1: oklch(100% 0.00011 271.152);
   --bg2: oklch(96.248% 0.00294 307.138);
@@ -37,11 +23,40 @@ html.dark {
   --tn2: oklch(75% 0.1 65.091);
 }
 
+@theme {
+  --color-bg1: var(--bg1);
+  --color-bg2: var(--bg2);
+  --color-bg3: var(--bg3);
+  --color-fn1: var(--fn1);
+  --color-fn2: var(--fn2);
+  --color-fnA: var(--fnA);
+  --color-tn1: var(--tn1);
+  --color-tn2: var(--tn2);
+  --font-roboto: var(--font-roboto);
+  --font-instrument: var(--font-instrument);
+  --font-emojis: var(--font-emojis);
+  --text-h1: 2rem; /* 32px */
+  --text-h2: 1.5rem; /* 24px */
+  --text-h3: 1.25rem; /* 20px */
+  --text-h4: 1rem; /* 16px */
+  --text-h5: 0.875rem; /* 14px */
+  --text-h6: 0.75rem; /* 12px */
+  --text-p: 1rem; /* 16px */
+  --text-a: 1rem; /* 16px */
+  --text-span: 0.8rem; /* 14px */
+  --breakpoint-middle: 54rem;
+}
+
+html {
+  font-size: 14px;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
 body {
-  font-family:
-    var(--font-roboto) var(--font-emojis) Arial,
-    Helvetica,
-    sans-serif;
+  font-family: var(--font-roboto), var(--font-emojis), Arial, Helvetica, sans-serif;
   background-color: var(--bg1);
   color: var(--fn1);
 }
@@ -53,7 +68,67 @@ body {
 
 .lucide {
   display: block;
-  width: 18px;
-  height: 18px;
-  stroke-width: 1.5;
+  width: 22px;
+  height: 22px;
+  stroke-width: 2;
+}
+
+/* Headings */
+h1 {
+  font-size: var(--text-h1);
+  font-weight: bold;
+}
+
+h2 {
+  font-size: var(--text-h2);
+}
+
+h3 {
+  font-size: var(--text-h3);
+}
+
+h4 {
+  font-size: var(--text-h4);
+}
+
+h5 {
+  font-size: var(--text-h5);
+}
+
+h6 {
+  font-size: var(--text-h6);
+}
+
+p,
+input,
+textarea,
+select {
+  font-size: var(--text-p);
+}
+
+span {
+  font-size: var(--text-span);
+}
+
+p + p {
+  margin-top: 1rem;
+}
+
+a {
+  font-size: var(--text-a);
+  text-decoration: none;
+}
+
+label {
+  font-size: var(--text-h6);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+button {
+  cursor: pointer;
 }
