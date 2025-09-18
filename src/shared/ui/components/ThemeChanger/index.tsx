@@ -3,13 +3,15 @@
 import { LoaderIcon } from 'lucide-react'
 import dynamic from 'next/dynamic'
 
+import Button from '../Button'
+
 const ThemeChanger = dynamic(() => import('./ThemeChanger'), {
   ssr: false,
   loading: () => {
     return (
-      <div className='flex items-center justify-center p-2.5'>
+      <Button>
         <LoaderIcon className='text-fn2 animate-spin' />
-      </div>
+      </Button>
     )
   }
 })
