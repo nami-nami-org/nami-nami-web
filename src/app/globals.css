@@ -137,7 +137,7 @@ html.dark {
 /* Estilos base de sonner */
 
 [data-sonner-toast] {
-  background: var(--bg2) !important;
+  background: var(--bg1) !important;
   color: var(--fn1) !important;
   border: 1.5px solid var(--bg3) !important;
   border-radius: 0.5rem !important;

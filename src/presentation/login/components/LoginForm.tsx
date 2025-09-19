@@ -3,6 +3,7 @@
 import Button from '@/shared/ui/components/Button'
 import FormInput from '@/shared/ui/components/FormInput'
 import { ArrowRightIcon } from 'lucide-react'
+import { redirect } from 'next/navigation'
 import type { FC } from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -30,6 +31,8 @@ const LoginForm: FC = () => {
       },
       error: 'Error'
     })
+
+    redirect('/')
   }
 
   return (
