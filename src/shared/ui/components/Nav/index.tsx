@@ -20,7 +20,7 @@ const Nav: FC = () => {
             </h5>
           </Link>
           <section className='text-fn1 flex flex-col'>
-            <span className='text-fn2'>Enviar a:</span>
+            <span className='text-fn2 text-span'>Enviar a:</span>
             <button className='flex items-center gap-1 font-semibold'>
               <h4>Lima</h4>
               <ChevronDown className='h-4 w-4' />
@@ -34,12 +34,12 @@ const Nav: FC = () => {
           <ThemeChanger />
           <NavMenu />
 
-          <Button className='border-bg3 bg-bg2 border-[1.5px]'>
+          <Button variant='normal-border'>
             <ShoppingCartIcon />
           </Button>
 
           <Link href='/login'>
-            <Button asClass className='bg-tn1 text-fnA'>
+            <Button asClass variant='active'>
               <UserIcon />
               <h4 className='text-fnA block max-xl:hidden'>Iniciar sesión</h4>
             </Button>
