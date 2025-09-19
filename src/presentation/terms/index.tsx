@@ -11,8 +11,6 @@ const Terms: FC = () => {
       <div className='m-auto flex w-full max-w-[1200px] flex-col flex-wrap items-center justify-center gap-5'>
         <section className='mb-12 flex flex-col items-center gap-2.5 text-center'>
           <h1 className='text-6xl font-bold'>Términos y condiciones de uso</h1>
-          <h1 className='text-6xl font-bold'>Términos y condiciones de uso</h1>
-          <h1 className='text-6xl font-bold'>Términos y condiciones de uso</h1>
           <p className='max-w-2xl'>
             Antes de continuar, necesitamos tu consentimiento para garantizar una experiencia segura, justa y transparente dentro
             de Ñami Ñami.
