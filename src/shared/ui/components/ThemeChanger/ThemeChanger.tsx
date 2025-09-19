@@ -31,8 +31,8 @@ const ThemeChanger = () => {
   return (
     <div className='w-fit text-right'>
       <Menu>
-        <MenuButton as={Button} variant='normal'>
-          <selectedTheme.icon />
+        <MenuButton as={Button} className='focus:outline-none'>
+          <selectedTheme.icon className='text-fn1 h-5 w-5' />
         </MenuButton>
         <MenuItems anchor='bottom end' className='bg-bg2 w-32 origin-bottom-right rounded-md p-1 shadow-lg focus:outline-none'>
           {themes.map(t => (
