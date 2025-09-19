@@ -1,3 +1,4 @@
+import Footer from '@/shared/components/footer/footer'
 import { bodyFonts } from '@/shared/ui/assets/fonts'
 import BenefitBanner from '@/shared/ui/components/BenefitBanner'
 import Nav from '@/shared/ui/components/Nav'
@@ -7,8 +8,6 @@ import type { FC, ReactNode } from 'react'
 
 import { globalMetadata as metadata, viewport } from '../shared/config/metadata/global.metadata'
 import './globals.css'
-
-import Footer from '@/shared/components/footer/footer'
 
 interface Props {
   children?: ReactNode | ReactNode[]
@@ -23,6 +22,7 @@ const Bootstrap: FC<Props> = ({ children }) => {
           <Nav />
           <BenefitBanner />
           {children}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

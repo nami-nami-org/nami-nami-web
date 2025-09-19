@@ -1,3 +1,4 @@
+import PlatilloCard from '@/shared/components/platillo-ancho/page'
 import type { FC, ReactNode } from 'react'
 
 import { Filters } from './components/filters'
@@ -33,6 +34,17 @@ const Home: FC<Props> = ({}) => {
         <Trends />
         <h3 className='font-bold'>Descubre opciones nuevas</h3>
         <Restaurants />
+      </div>
+
+      <div className='min-h-screen bg-neutral-900 p-6'>
+        <h1 className='mb-6 text-2xl font-bold text-white'>Recomendados 🍽️</h1>
+
+        <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
+          <PlatilloCard nombre='Ceviche Especial' precio={35} imagen='/images/ceviche.png' rating={4} reseñas={120} />
+          <PlatilloCard nombre='Lomo Saltado' precio={40} imagen='/images/lomo.png' rating={5} reseñas={200} />
+          <PlatilloCard nombre='Cuy Chactado' precio={40} imagen='/images/cuy.png' rating={5} reseñas={200} />
+          <PlatilloCard nombre='Causa Limeña' precio={40} imagen='/images/causa.png' rating={5} reseñas={200} />
+        </div>
       </div>
     </main>
   )
