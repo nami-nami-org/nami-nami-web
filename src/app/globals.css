@@ -35,100 +35,119 @@ html.dark {
   --font-roboto: var(--font-roboto);
   --font-instrument: var(--font-instrument);
   --font-emojis: var(--font-emojis);
-  --text-h1: 2rem; /* 32px */
-  --text-h2: 1.5rem; /* 24px */
-  --text-h3: 1.25rem; /* 20px */
+  --text-h1: 1.8rem; /* ~28.8px */
+  --text-h2: 1.4rem; /* ~22.4px */
+  --text-h3: 1.15rem; /* ~18.4px */
   --text-h4: 1rem; /* 16px */
-  --text-h5: 0.875rem; /* 14px */
-  --text-h6: 0.75rem; /* 12px */
+  --text-h5: 0.9rem; /* 14.4px */
+  --text-h6: 0.8rem; /* 12.8px */
   --text-p: 1rem; /* 16px */
   --text-a: 1rem; /* 16px */
-  --text-span: 0.8rem; /* 14px */
+  --text-span: 0.8rem; /* 12.8px */
   --breakpoint-middle: 54rem;
 }
 
-html {
-  font-size: 14px;
+@layer base {
+  html {
+    font-size: 14px;
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
+  }
+
+  body {
+    font-family: var(--font-roboto), var(--font-emojis), Arial, Helvetica, sans-serif;
+    background-color: var(--bg1);
+    color: var(--fn1);
+  }
+
+  ::selection {
+    background-color: var(--tn1);
+    color: var(--fnA);
+  }
+
+  .lucide {
+    display: block;
+    width: 22px;
+    height: 22px;
+    stroke-width: 2;
+  }
+
+  /* Headings */
+  h1 {
+    font-weight: bold;
+  }
+
+  h2 {
+    font-size: var(--text-h2);
+  }
+
+  h3 {
+    font-size: var(--text-h3);
+  }
+
+  h4 {
+    font-size: var(--text-h4);
+    color: var(--fn2);
+  }
+
+  h5 {
+    font-size: var(--text-h5);
+    color: var(--fn2);
+  }
+
+  h6 {
+    font-size: var(--text-h6);
+    color: var(--fn2);
+  }
+
+  p,
+  input,
+  textarea,
+  select {
+    font-size: var(--text-p);
+    color: var(--fn2);
+  }
+
+  p + p {
+    margin-top: 1rem;
+  }
+
+  a {
+    font-size: var(--text-a);
+    text-decoration: none;
+  }
+
+  label {
+    font-size: var(--text-h6);
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+  }
+
+  button {
+    cursor: pointer;
+  }
 }
 
-html::-webkit-scrollbar {
-  display: none;
+/* Estilos base de sonner */
+
+[data-sonner-toast] {
+  background: var(--bg1) !important;
+  color: var(--fn1) !important;
+  border: 1.5px solid var(--bg3) !important;
+  border-radius: 0.5rem !important;
 }
 
-body {
-  font-family: var(--font-roboto), var(--font-emojis), Arial, Helvetica, sans-serif;
-  background-color: var(--bg1);
-  color: var(--fn1);
-}
-
-::selection {
-  background-color: var(--tn1);
-  color: var(--fnA);
-}
-
-.lucide {
-  display: block;
-  width: 22px;
-  height: 22px;
-  stroke-width: 2;
-}
-
-/* Headings */
-h1 {
-  font-size: var(--text-h1);
+[data-sonner-toast] [data-title] {
+  color: var(--fn1) !important;
   font-weight: bold;
 }
 
-h2 {
-  font-size: var(--text-h2);
-}
-
-h3 {
-  font-size: var(--text-h3);
-}
-
-h4 {
-  font-size: var(--text-h4);
-}
-
-h5 {
-  font-size: var(--text-h5);
-}
-
-h6 {
-  font-size: var(--text-h6);
-}
-
-p,
-input,
-textarea,
-select {
-  font-size: var(--text-p);
-}
-
-span {
-  font-size: var(--text-span);
-}
-
-p + p {
-  margin-top: 1rem;
-}
-
-a {
-  font-size: var(--text-a);
-  text-decoration: none;
-}
-
-label {
-  font-size: var(--text-h6);
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-  outline: none;
-}
-
-button {
-  cursor: pointer;
+[data-sonner-toast] [data-description] {
+  color: var(--fn2) !important;
 }
