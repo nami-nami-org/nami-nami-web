@@ -39,7 +39,7 @@ const Login: FC = () => {
         <footer className='flex flex-col gap-2.5'>
           <h2 className='font-bold'>¿Aún no tienes una cuenta?</h2>
           <Link href='/register'>
-            <Button asClass>
+            <Button asClass className='w-fit justify-center' variant='border'>
               <span className='font-emojis'>👉</span>
               <span className='text-h4'>Regístrate aquí</span>
             </Button>

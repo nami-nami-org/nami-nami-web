@@ -1,0 +1,4 @@
+.mentions__highlighter strong,
+.mentions__highlighter span {
+  font-size: var(--text-h3) !important;
+}
