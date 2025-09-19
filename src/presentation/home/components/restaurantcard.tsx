@@ -1,31 +1,36 @@
-import { Star } from "lucide-react";
+import RatingBadge from '@/shared/ui/components/RatingBadge'
+import { Image } from '@unpic/react/nextjs'
+import Link from 'next/link'
 
-export default function RestaurantCard({ image, logo, name, rating, time, price }) {
+interface RestaurantCardProps {
+  image: string
+  logo: string
+  name: string
+  rating: number | string
+  time: string
+  price: string
+}
+
+const RestaurantCard: React.FC<RestaurantCardProps> = ({ image, logo, name, rating, time, price }) => {
   return (
-    <div className="rounded-xl overflow-hidden shadow-md bg-white hover:shadow-lg transition w-[380px] h-[170px] flex flex-col">  {/* Imagen principal */}
-      <div className="relative w-full h-[90px]">
-        <img src={image} alt={name} className="w-full h-full object-cover" />
-
-        {/* Rating */}
-        <div className="absolute top-2 right-2 flex items-center bg-white rounded-full px-2 py-1 shadow">
-          <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-          <span className="ml-1 text-sm font-semibold">{rating}</span>
-        </div>
+    <Link href='/pedidos' className='bg-bg2 hover:bg-bg3 flex w-[380px] flex-col overflow-hidden rounded-xl shadow-md transition'>
+      <div className='relative h-[120px] w-full'>
+        <Image layout='fullWidth' src={image} alt={name} height={120} />
+        <RatingBadge rating={rating} />
       </div>
 
-      {/* Info del restaurante */}
-      <div className="flex items-start gap-3 p-3 flex-1">
-        {/* Logo */}
-        <img src={logo} alt={name} className="w-12 h-12 rounded-md object-cover" />
+      <div className='flex items-start gap-3 p-3'>
+        <Image src={logo} alt={name} width={48} height={48} className='rounded-md object-cover' />
 
-        {/* Detalles */}
-        <div className="flex flex-col justify-center">
-          <h3 className="font-semibold text-gray-800">{name}</h3>
-          <p className="text-sm text-gray-600">
-            {time} · <span className="text-red-500 font-semibold">{price}</span>
+        <div className='flex flex-col justify-center'>
+          <h3 className='font-semibold'>{name}</h3>
+          <p className='text-fn2 text-sm'>
+            {time} · <span className='text-tn1 font-semibold'>{price}</span>
           </p>
         </div>
       </div>
-    </div>
-  );
+    </Link>
+  )
 }
+
+export default RestaurantCard

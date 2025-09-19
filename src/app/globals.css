@@ -47,88 +47,90 @@ html.dark {
   --breakpoint-middle: 54rem;
 }
 
-html {
-  font-size: 14px;
-}
+@layer base {
+  html {
+    font-size: 14px;
+  }
 
-html::-webkit-scrollbar {
-  display: none;
-}
+  html::-webkit-scrollbar {
+    display: none;
+  }
 
-body {
-  font-family: var(--font-roboto), var(--font-emojis), Arial, Helvetica, sans-serif;
-  background-color: var(--bg1);
-  color: var(--fn1);
-}
+  body {
+    font-family: var(--font-roboto), var(--font-emojis), Arial, Helvetica, sans-serif;
+    background-color: var(--bg1);
+    color: var(--fn1);
+  }
 
-::selection {
-  background-color: var(--tn1);
-  color: var(--fnA);
-}
+  ::selection {
+    background-color: var(--tn1);
+    color: var(--fnA);
+  }
 
-.lucide {
-  display: block;
-  width: 22px;
-  height: 22px;
-  stroke-width: 2;
-}
+  .lucide {
+    display: block;
+    width: 22px;
+    height: 22px;
+    stroke-width: 2;
+  }
 
-/* Headings */
-h1 {
-  font-size: var(--text-h1);
-  font-weight: bold;
-}
+  /* Headings */
+  h1 {
+    font-size: var(--text-h1);
+    font-weight: bold;
+  }
 
-h2 {
-  font-size: var(--text-h2);
-}
+  h2 {
+    font-size: var(--text-h2);
+  }
 
-h3 {
-  font-size: var(--text-h3);
-}
+  h3 {
+    font-size: var(--text-h3);
+  }
 
-h4 {
-  font-size: var(--text-h4);
-}
+  h4 {
+    font-size: var(--text-h4);
+  }
 
-h5 {
-  font-size: var(--text-h5);
-}
+  h5 {
+    font-size: var(--text-h5);
+  }
 
-h6 {
-  font-size: var(--text-h6);
-}
+  h6 {
+    font-size: var(--text-h6);
+  }
 
-p,
-input,
-textarea,
-select {
-  font-size: var(--text-p);
-}
+  p,
+  input,
+  textarea,
+  select {
+    font-size: var(--text-p);
+  }
 
-span {
-  font-size: var(--text-span);
-}
+  span {
+    font-size: var(--text-span);
+  }
 
-p + p {
-  margin-top: 1rem;
-}
+  p + p {
+    margin-top: 1rem;
+  }
 
-a {
-  font-size: var(--text-a);
-  text-decoration: none;
-}
+  a {
+    font-size: var(--text-a);
+    text-decoration: none;
+  }
 
-label {
-  font-size: var(--text-h6);
-}
+  label {
+    font-size: var(--text-h6);
+  }
 
-input:focus,
-textarea:focus,
-select:focus {
-  outline: none;
-}
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+  }
 
-button {
-  cursor: pointer;
+  button {
+    cursor: pointer;
+  }
 }

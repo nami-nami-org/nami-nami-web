@@ -22,7 +22,7 @@ const Bootstrap: FC<Props> = ({ children }) => {
           <Nav />
           <BenefitBanner />
           {children}
-          <Footer />
+          {/* <Footer /> */}
         </ThemeProvider>
       </body>
     </html>
