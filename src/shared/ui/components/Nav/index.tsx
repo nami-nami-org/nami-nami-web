@@ -11,7 +11,7 @@ import NavMenu from './NavMenu'
 const Nav: FC = () => {
   return (
     <header className='bg-bg1 sticky top-0 z-50 w-full'>
-      <div className='max-middle:justify-center m-auto flex w-full max-w-[1200px] flex-wrap items-center justify-between gap-2.5 max-xl:px-2.5'>
+      <div className='max-middle:justify-center m-auto flex w-full max-w-[1200px] flex-wrap items-center justify-between gap-2.5 pt-2 max-xl:px-2.5'>
         <div className='flex flex-row items-center gap-7'>
           <Link href='/' className='flex items-center gap-2.5'>
             <Logo />

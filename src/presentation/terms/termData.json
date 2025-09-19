@@ -1,46 +1,55 @@
 [
   {
     "emoji": "🔒",
+    "emojiBg": "bg-yellow-100",
     "title": "Manejo responsable de datos personales",
     "content": "Nos comprometemos a proteger tu privacidad con un modelo de 'privacidad desde el diseño'. Solo utilizamos tus datos para mejorar tu experiencia, procesar pedidos y conectar de forma segura a usuarios, restaurantes y repartidores."
   },
   {
     "emoji": "📊",
+    "emojiBg": "bg-blue-100",
     "title": "¿Qué información recopilamos?",
     "content": "Datos de perfil (nombre, correo, teléfono), historial de pedidos y preferencias gastronómicas, ubicación para optimizar entregas, información de pago (siempre encriptada y segura). Todo dentro de Ñami Ñami."
   },
   {
     "emoji": "🛡️",
+    "emojiBg": "bg-red-100",
     "title": "¿Cómo protegemos tus datos?",
     "content": "Encriptación de extremo a extremo, acceso restringido solo a personal autorizado, cumplimiento de regulaciones de privacidad, auditorías de seguridad y trazabilidad accesible."
   },
   {
     "emoji": "💅",
+    "emojiBg": "bg-pink-100",
     "title": "Derechos de los usuarios",
     "content": "Tienes derecho a acceder, rectificar o eliminar tus datos en cualquier momento, así como a recibir información clara sobre precios, comisiones y condiciones de entrega."
   },
   {
     "emoji": "🥗",
+    "emojiBg": "bg-green-100",
     "title": "Responsabilidad de los restaurantes",
     "content": "Los restaurantes son responsables de la veracidad de la información publicada (platillos, precios, horarios, disponibilidad) y del cumplimiento de normas sanitarias vigentes."
   },
   {
     "emoji": "📱",
+    "emojiBg": "bg-indigo-100",
     "title": "Uso adecuado de la plataforma",
     "content": "Ñami Ñami se reserva el derecho de suspender cuentas por uso indebido, fraude o incumplimiento de los términos, velando siempre por la seguridad de la comunidad."
   },
   {
     "emoji": "⚖️",
+    "emojiBg": "bg-orange-100",
     "title": "Transparencia en comisiones",
     "content": "Ñami Ñami aplica comisiones reducidas y claras, sin costos ocultos ni algoritmos que limiten la visibilidad de los restaurantes."
   },
   {
     "emoji": "🌍",
+    "emojiBg": "bg-teal-100",
     "title": "Sostenibilidad y responsabilidad social",
     "content": "Priorizamos la proximidad en las entregas para reducir tiempos de espera, consumo de combustible y huella ambiental, fomentando un delivery más responsable."
   },
   {
     "emoji": "🚚",
+    "emojiBg": "bg-gray-100",
     "title": "Responsabilidad en los pedidos",
     "content": "Ñami Ñami conecta usuarios, restaurantes y repartidores, asegurando que cada pedido sea entregado en tiempo y forma. En caso de incidencias, el usuario podrá reportarlas para recibir soporte inmediato."
   }
