@@ -10,7 +10,7 @@ import NavLinks from './NavLinks'
 const NavMenu: FC = () => {
   return (
     <Menu as='div' className='middle:hidden relative'>
-      <MenuButton as={Button} className='border-bg3 bg-bg2 border-[1.5px] focus:outline-none'>
+      <MenuButton as={Button} variant='border'>
         <MenuIcon />
       </MenuButton>
       <MenuItems

@@ -57,7 +57,7 @@ const LoginForm: FC = () => {
         error={errors.password?.message}
       />
 
-      <Button variant='active' type='submit'>
+      <Button variant='active' type='submit' className='justify-center'>
         <span className='text-h4'>Iniciar Sesión</span>
         <ArrowRightIcon />
       </Button>

@@ -1,7 +1,7 @@
 'use client'
 
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { LaptopIcon, MoonStarIcon, SunDimIcon } from 'lucide-react'
+import { LaptopIcon, MoonStarIcon, SunIcon } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { useState } from 'react'
 
@@ -14,7 +14,7 @@ type Theme = {
 }
 
 const themes: Theme[] = [
-  { id: 'light', name: 'Claro', icon: SunDimIcon },
+  { id: 'light', name: 'Claro', icon: SunIcon },
   { id: 'dark', name: 'Oscuro', icon: MoonStarIcon },
   { id: 'system', name: 'Sistema', icon: LaptopIcon }
 ]
@@ -31,9 +31,10 @@ const ThemeChanger = () => {
   return (
     <div className='w-fit text-right'>
       <Menu>
-        <MenuButton as={Button} className='focus:outline-none'>
+        <MenuButton as={Button} variant='border'>
           <selectedTheme.icon className='text-fn1 h-5 w-5' />
         </MenuButton>
+
         <MenuItems anchor='bottom end' className='bg-bg2 w-32 origin-bottom-right rounded-md p-1 shadow-lg focus:outline-none'>
           {themes.map(t => (
             <MenuItem key={t.id}>

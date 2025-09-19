@@ -1,14 +1,8 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-	/* config options here */
-	reactStrictMode: true,
-	experimental: {
-		viewTransition: true
-	},
-	images: {
-		domains: ['img.freepik.com']
-  	}
+  /* config options here */
+  reactStrictMode: true
 }
 
 export default nextConfig

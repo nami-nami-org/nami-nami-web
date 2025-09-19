@@ -10,8 +10,8 @@ import NavMenu from './NavMenu'
 
 const Nav: FC = () => {
   return (
-    <header className='bg-bg1 sticky top-0 w-full'>
-      <div className='max-middle:justify-center m-auto flex w-full max-w-[1200px] flex-wrap items-center justify-between gap-2.5 py-2 max-xl:px-2.5'>
+    <header className='bg-bg1 sticky top-0 z-50 w-full'>
+      <div className='max-middle:justify-center m-auto flex w-full max-w-[1200px] flex-wrap items-center justify-between gap-2.5 pt-2 max-xl:px-2.5'>
         <div className='flex flex-row items-center gap-7'>
           <Link href='/' className='flex items-center gap-2.5'>
             <Logo />
@@ -34,12 +34,12 @@ const Nav: FC = () => {
           <ThemeChanger />
           <NavMenu />
 
-          <Button className='border-bg3 bg-bg2 border-[1.5px]'>
+          <Button variant='border'>
             <ShoppingCartIcon />
           </Button>
 
           <Link href='/login'>
-            <Button asClass className='bg-tn1 text-fnA'>
+            <Button asClass variant='active'>
               <UserIcon />
               <h4 className='text-fnA block max-xl:hidden'>Iniciar sesión</h4>
             </Button>

@@ -47,88 +47,95 @@ html.dark {
   --breakpoint-middle: 54rem;
 }
 
-html {
-  font-size: 14px;
-}
+@layer base {
+  html {
+    font-size: 14px;
+  }
 
-html::-webkit-scrollbar {
-  display: none;
-}
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 
-body {
-  font-family: var(--font-roboto), var(--font-emojis), Arial, Helvetica, sans-serif;
-  background-color: var(--bg1);
-  color: var(--fn1);
-}
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 
-::selection {
-  background-color: var(--tn1);
-  color: var(--fnA);
-}
+  body {
+    font-family: var(--font-roboto), var(--font-emojis), Arial, Helvetica, sans-serif;
+    background-color: var(--bg1);
+    color: var(--fn1);
+  }
 
-.lucide {
-  display: block;
-  width: 22px;
-  height: 22px;
-  stroke-width: 2;
-}
+  ::selection {
+    background-color: var(--tn1);
+    color: var(--fnA);
+  }
 
-/* Headings */
-h1 {
-  font-size: var(--text-h1);
-  font-weight: bold;
-}
+  .lucide {
+    display: block;
+    width: 22px;
+    height: 22px;
+    stroke-width: 2;
+  }
 
-h2 {
-  font-size: var(--text-h2);
-}
+  /* Headings */
+  h1 {
+    font-size: var(--text-h1);
+    font-weight: bold;
+  }
 
-h3 {
-  font-size: var(--text-h3);
-}
+  h2 {
+    font-size: var(--text-h2);
+  }
 
-h4 {
-  font-size: var(--text-h4);
-}
+  h3 {
+    font-size: var(--text-h3);
+  }
 
-h5 {
-  font-size: var(--text-h5);
-}
+  h4 {
+    font-size: var(--text-h4);
+  }
 
-h6 {
-  font-size: var(--text-h6);
-}
+  h5 {
+    font-size: var(--text-h5);
+  }
 
-p,
-input,
-textarea,
-select {
-  font-size: var(--text-p);
-}
+  h6 {
+    font-size: var(--text-h6);
+  }
 
-span {
-  font-size: var(--text-span);
-}
+  p,
+  input,
+  textarea,
+  select {
+    font-size: var(--text-p);
+  }
 
-p + p {
-  margin-top: 1rem;
-}
+  span {
+    font-size: var(--text-span);
+  }
 
-a {
-  font-size: var(--text-a);
-  text-decoration: none;
-}
+  p + p {
+    margin-top: 1rem;
+  }
 
-label {
-  font-size: var(--text-h6);
-}
+  a {
+    font-size: var(--text-a);
+    text-decoration: none;
+  }
 
-input:focus,
-textarea:focus,
-select:focus {
-  outline: none;
-}
+  label {
+    font-size: var(--text-h6);
+  }
 
-button {
-  cursor: pointer;
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+  }
+
+  button {
+    cursor: pointer;
+  }
 }
