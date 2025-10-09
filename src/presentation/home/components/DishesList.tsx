@@ -1,54 +1,18 @@
-import DishCard from './DishCard'
+'use client'
 
-const dishes = [
-  {
-    name: 'Special Ceviche',
-    price: 35,
-    image: '/images/ceviche.png',
-    rating: 3.7,
-    reviews: 120
-  },
-  {
-    name: 'Lomo Saltado',
-    price: 40,
-    image: '/images/lomo.png',
-    rating: 4.5,
-    reviews: 200
-  },
-  {
-    name: 'Cuy Chactado',
-    price: 40,
-    image: '/images/cuy.png',
-    rating: 2.7,
-    reviews: 200
-  },
-  {
-    name: 'Limeña Causa',
-    price: 40,
-    image: '/images/causa.png',
-    rating: 3.45,
-    reviews: 200
-  },
-  {
-    name: 'Cuy Chactado',
-    price: 40,
-    image: '/images/cuy.png',
-    rating: 4.6,
-    reviews: 200
-  },
-  {
-    name: 'Limeña Causa',
-    price: 40,
-    image: '/images/causa.png',
-    rating: 2.2,
-    reviews: 200
-  }
-]
+import { useDishesQuery } from '@/core/query/dishes.query'
+
+import DishCard from './DishCard'
+import DishListSkeleton from './DishCard/DishListSkeleton'
 
 const DishesList: React.FC = () => {
+  const { data, isLoading, isError } = useDishesQuery.getAllDishes()
+  if (isError) return <p>Jeff gordo 😀</p>
+  if (isLoading || !data) return <DishListSkeleton />
+
   return (
     <div className='flex flex-wrap justify-center gap-5'>
-      {dishes.map((dish, index) => (
+      {data.map((dish, index) => (
         <DishCard key={index} {...dish} />
       ))}
     </div>
