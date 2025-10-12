@@ -7,6 +7,7 @@ async function getAllDishes() {
     // return res.data
     return [
       {
+        id: 1,
         name: 'Special Ceviche',
         price: 35,
         image: '/images/ceviche.png',
@@ -14,6 +15,7 @@ async function getAllDishes() {
         reviews: 120
       },
       {
+        id: 2,
         name: 'Lomo Saltado',
         price: 40,
         image: '/images/lomo.png',
@@ -21,6 +23,7 @@ async function getAllDishes() {
         reviews: 200
       },
       {
+        id: 3,
         name: 'Cuy Chactado',
         price: 40,
         image: '/images/cuy.png',
@@ -28,6 +31,7 @@ async function getAllDishes() {
         reviews: 200
       },
       {
+        id: 4,
         name: 'Limeña Causa',
         price: 40,
         image: '/images/causa.png',
@@ -35,6 +39,7 @@ async function getAllDishes() {
         reviews: 200
       },
       {
+        id: 5,
         name: 'Cuy Chactado',
         price: 40,
         image: '/images/cuy.png',
@@ -42,6 +47,7 @@ async function getAllDishes() {
         reviews: 200
       },
       {
+        id: 6,
         name: 'Limeña Causa',
         price: 40,
         image: '/images/causa.png',
