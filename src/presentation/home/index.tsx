@@ -53,6 +53,7 @@ const Home: FC<Props> = ({}) => {
           <DishesList />
         </div>
       </article>
+      
     </main>
   )
 }
