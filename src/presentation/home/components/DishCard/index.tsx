@@ -1,10 +1,15 @@
+'use client'
+
 import Button from '@/shared/ui/components/Button'
+import useCartStore from '@/shared/store/useCartStore'
 import StarRating from '@/shared/ui/components/StarRating'
 import { Image } from '@unpic/react/nextjs'
 import { ShoppingCartIcon } from 'lucide-react'
 import { FC } from 'react'
+import { toast } from 'sonner'
 
 interface DishCardProps {
+  id: number
   name: string
   price: number
   image: string
@@ -12,7 +17,13 @@ interface DishCardProps {
   reviews?: number
 }
 
-const DishCard: FC<DishCardProps> = ({ name, price, image, rating = 5, reviews = 0 }) => {
+const DishCard: FC<DishCardProps> = ({ id, name, price, image, rating = 5, reviews = 0 }) => {
+  const addItem = useCartStore(state => state.addItem)
+
+  const handleAddToCart = () => {
+    addItem({ id, name, price, image })
+    toast.success(`${name} agregado al carrito`)
+  }
   return (
     <div className='bg-bg2 border-bg3 flex h-fit w-full max-w-[350px] flex-col gap-3.5 overflow-hidden rounded-2xl border pb-3.5'>
       <header className='relative h-56 w-full'>
@@ -30,7 +41,7 @@ const DishCard: FC<DishCardProps> = ({ name, price, image, rating = 5, reviews =
           <StarRating rating={rating} />
         </div>
 
-        <Button variant='active' className='justify-center'>
+        <Button variant='active' className='justify-center' onClick={handleAddToCart}>
           <h4>Agregar al carrito</h4>
           <ShoppingCartIcon />
         </Button>
