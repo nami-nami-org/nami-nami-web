@@ -1,25 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import nami_api from './root.service'
 import lex_api from './root.service'
 
-async function getAllUsers() {
-	try {
-		const res = await lex_api.get('/admin/list-users')
-		return res.data
-	} catch (err: any) {
-		const message = err.response?.data?.message || err.message || 'Error al obtener usuarios'
-		throw new Error(message)
-	}
-}
-
 interface NewUserPayload {
-	name: string
 	email: string
 	password: string
-	role?: string | null
-	data?: string | null
 }
-async function createUser(payload: NewUserPayload) {
+
+async function loginQuery(payload: NewUserPayload) {
 	try {
-		const res = await lex_api.post('/admin/create-user', payload, {
+		const res = await nami_api.post('/auth/login', payload, {
 			headers: {
 				'Content-Type': 'application/json'
 			}
@@ -31,29 +21,29 @@ async function createUser(payload: NewUserPayload) {
 	}
 }
 
-interface UpdateUserPayload {
-	id: string
+interface User {
 	name: string
-	role: string
-	banned: boolean
-	banReason: string
+	email: string
+	password: string
+	phone: string
 }
-async function updateUser(payload: UpdateUserPayload) {
-	try {
-		const { id, ...data } = payload
-		const payloadMapped = { userId: id, data }
-		const res = await lex_api.post('/admin/update-user', payloadMapped, {
+
+async function createUser(payload: User) {
+	try{
+		const res = await lex_api.post('/auth/register', payload, {
 			headers: { 'Content-Type': 'application/json' }
 		})
 		return res.data
 	} catch (err: any) {
-		const message = err.response?.data?.message || err.message || 'Error al actualizar usuario'
+		const message = err.response?.data?.message || err.message || 'Error al crear usuario'
 		throw new Error(message)
 	}
 }
 
+
+
 export const userService = {
-	getAllUsers,
+	loginQuery,
 	createUser,
-	updateUser
+	
 }
