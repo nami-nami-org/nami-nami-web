@@ -1,11 +1,9 @@
   'use client'
 
-<<<<<<< Updated upstream
 import { userService } from '@/core/services/users.service'
 import Button from '@/shared/ui/components/Button'
 import FormInput from '@/shared/ui/components/FormInput'
 import { ArrowRightIcon } from 'lucide-react'
-import { redirect } from 'next/navigation'
 import type { FC } from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -34,35 +32,7 @@ const LoginForm: FC = () => {
       },
       error: 'Error'
     })
-=======
-  import Button from '@/shared/ui/components/Button'
-  import FormInput from '@/shared/ui/components/FormInput'
-  import { ArrowRightIcon } from 'lucide-react'
-  import { redirect } from 'next/navigation'
-  import type { FC } from 'react'
-  import { type SubmitHandler, useForm } from 'react-hook-form'
-  import { toast } from 'sonner'
-
-  import { loginFormValues, loginResolver } from '../schema/LoginSchema'
-  import { userService } from '@/core/services/users.service'
-
-  const LoginForm: FC = () => {
-    const {
-      register,
-      handleSubmit,
-      formState: { errors }
-    } = useForm<loginFormValues>({
-      resolver: loginResolver
-    })
-
-    const onSubmit: SubmitHandler<loginFormValues> = async (data) => {
-      const data2 = await userService.loginQuery(data)
-      console.log('Datos de inicio de sesión:', data2)
->>>>>>> Stashed changes
-
-      // redirect('/')
-    }
-
+  }
     return (
       <form className='flex w-fit flex-col gap-5 pl-5' onSubmit={handleSubmit(onSubmit)}>
         <FormInput
