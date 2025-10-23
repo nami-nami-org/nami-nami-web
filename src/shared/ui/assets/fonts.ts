@@ -1,9 +1,15 @@
-import { Instrument_Serif, Noto_Color_Emoji, Roboto } from 'next/font/google'
+import { Geist, Geist_Mono, Instrument_Serif, Noto_Color_Emoji } from 'next/font/google'
 
-export const roboto = Roboto({
+export const geist = Geist({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700', '800'],
-  variable: '--font-roboto'
+  variable: '--font-geist'
+})
+
+export const geistMono = Geist_Mono({
+  subsets: ['latin'],
+  weight: ['300', '400', '500'],
+  variable: '--font-geist-mono'
 })
 
 export const instrument = Instrument_Serif({
@@ -18,4 +24,4 @@ export const noto = Noto_Color_Emoji({
   variable: '--font-emojis'
 })
 
-export const bodyFonts = `${roboto.variable} ${instrument.variable} ${noto.variable}`
+export const bodyFonts = `${geistMono.variable} ${geist.variable} ${instrument.variable} ${noto.variable}`
