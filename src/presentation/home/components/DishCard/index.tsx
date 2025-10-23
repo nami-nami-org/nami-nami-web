@@ -1,10 +1,12 @@
 import Button from '@/shared/ui/components/Button'
 import StarRating from '@/shared/ui/components/StarRating'
 import { Image } from '@unpic/react/nextjs'
-import { ShoppingCartIcon } from 'lucide-react'
+import { EyeIcon, ShoppingCartIcon } from 'lucide-react'
+import Link from 'next/link'
 import { FC } from 'react'
 
 interface DishCardProps {
+  id: string
   name: string
   price: number
   image: string
@@ -12,7 +14,8 @@ interface DishCardProps {
   reviews?: number
 }
 
-const DishCard: FC<DishCardProps> = ({ name, price, image, rating = 5, reviews = 0 }) => {
+const DishCard: FC<DishCardProps> = ({ name, price, image, rating = 5, reviews = 0, id }) => {
+  console.log('id', id)
   return (
     <div className='bg-bg3 border-bg1 flex h-fit w-full max-w-[350px] flex-col gap-3.5 overflow-hidden rounded-2xl border pb-3.5'>
       <header className='relative h-56 w-full'>
@@ -30,10 +33,17 @@ const DishCard: FC<DishCardProps> = ({ name, price, image, rating = 5, reviews =
           <StarRating rating={rating} />
         </div>
 
-        <Button variant='active' className='justify-center'>
-          <h4>Agregar al carrito</h4>
-          <ShoppingCartIcon />
-        </Button>
+        <div className='flex gap-2'>
+          <Button variant='active' className='justify-center'>
+            <h4>Agregar al carrito</h4>
+            <ShoppingCartIcon />
+          </Button>
+          <Link href={`/dishes/${id}`}>
+            <Button variant='border'>
+              <EyeIcon />
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   )

@@ -3,6 +3,7 @@ import { Image } from '@unpic/react/nextjs'
 import Link from 'next/link'
 
 interface RestaurantCardProps {
+  id: string
   image: string
   logo: string
   name: string
@@ -11,9 +12,12 @@ interface RestaurantCardProps {
   price: string
 }
 
-const RestaurantCard: React.FC<RestaurantCardProps> = ({ image, logo, name, rating, time, price }) => {
+const RestaurantCard: React.FC<RestaurantCardProps> = ({ image, logo, name, rating, time, price, id }) => {
   return (
-    <Link href='/pedidos' className='bg-bg2 hover:bg-bg3 border-bg3 flex w-[380px] flex-col overflow-hidden rounded-xl border'>
+    <Link
+      href={`/restaurants/${id}`}
+      className='bg-bg2 hover:bg-bg3 border-bg3 flex w-[380px] flex-col overflow-hidden rounded-xl border'
+    >
       <div className='relative h-[120px] w-full'>
         <Image layout='fullWidth' src={image} alt={name} height={120} />
         <RatingBadge rating={rating} />

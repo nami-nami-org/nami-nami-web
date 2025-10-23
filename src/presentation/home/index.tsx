@@ -40,7 +40,7 @@ const Home: FC<Props> = ({}) => {
         </div>
 
         <div className='5 flex flex-col gap-5'>
-          <h2 className='font-semibold'>Descubre opciones nuevas 🍮</h2>
+          <h2 className='font-semibold'>Descubre afiliados 🏘️</h2>
           <Restaurants />
         </div>
       </article>
