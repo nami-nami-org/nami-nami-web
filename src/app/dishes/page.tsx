@@ -1,7 +1,5 @@
-import type { FC } from 'react'
+import PlatillosPage from '@/presentation/dishes/dishes'
 
-const Page: FC = () => {
-  return <div>Page</div>
+export default function RestaurantPage() {
+  return <PlatillosPage />
 }
-
-export default Page
