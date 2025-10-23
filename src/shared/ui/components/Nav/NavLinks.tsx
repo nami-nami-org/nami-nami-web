@@ -1,8 +1,7 @@
 'use client'
 
+import NAVIGATION from '@/shared/config/constants/navLinks'
 import useNavStore from '@/shared/store/useNavStore'
-import { bowlChopsticks } from '@lucide/lab'
-import { ChefHatIcon, Home as HomeIcon, Icon, SaladIcon } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import type { FC } from 'react'
@@ -15,16 +14,9 @@ const NavLinks: FC<NavLinksProps> = ({ isMobile = false }) => {
   const pathname = usePathname()
   const { closeMenu } = useNavStore()
 
-  const links = [
-    { href: '/', label: 'Inicio', icon: HomeIcon },
-    { href: '/platillos', label: 'Platillos', icon: () => <Icon iconNode={bowlChopsticks} /> },
-    { href: '/restaurantes', label: 'Restaurantes', icon: ChefHatIcon },
-    { href: '/veganos', label: 'Veganos', icon: SaladIcon }
-  ]
-
   return (
     <nav className={`flex ${isMobile ? 'flex-col gap-1 p-1' : 'items-center gap-5'} ${isMobile ? '' : 'max-region:hidden'}`}>
-      {links.map(({ href, label, icon: Icon }) => {
+      {NAVIGATION.globals.map(({ href, label, icon: Icon }) => {
         const isActive = pathname === href
         return (
           <Link
