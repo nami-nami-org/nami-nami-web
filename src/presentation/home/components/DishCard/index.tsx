@@ -14,19 +14,19 @@ interface DishCardProps {
 
 const DishCard: FC<DishCardProps> = ({ name, price, image, rating = 5, reviews = 0 }) => {
   return (
-    <div className='bg-bg2 border-bg3 flex h-fit w-full max-w-[350px] flex-col gap-3.5 overflow-hidden rounded-2xl border pb-3.5'>
+    <div className='bg-bg3 border-bg1 flex h-fit w-full max-w-[350px] flex-col gap-3.5 overflow-hidden rounded-2xl border pb-3.5'>
       <header className='relative h-56 w-full'>
         <Image src={image} alt={name} layout='fullWidth' className='h-full w-full object-cover' />
       </header>
 
-      <div className='flex flex-col gap-2.5 px-3.5'>
+      <div className='flex flex-col gap-5 px-3.5'>
         <div>
           <h3 className='font-semibold'>{name}</h3>
           <p className='text-tn1 font-bold'>S/ {price.toFixed(2)}</p>
         </div>
 
         <div className='flex items-center gap-1'>
-          <p className='text-fn2 text-span ml-2'>({reviews} reviews)</p>
+          <p className='text-fn2'>{reviews} reviews</p>
           <StarRating rating={rating} />
         </div>
 
