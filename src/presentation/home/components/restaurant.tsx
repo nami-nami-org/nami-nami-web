@@ -65,8 +65,8 @@ export default function Restaurants() {
       time: '15-25 min',
       price: 'S/ 12.00'
     },
-
     {
+      id: '4',
       image: '/imagenes/burritos texmex.jpeg',
       logo: '/imagenes/burritos texmex.jpeg',
       name: 'Tex Mex Grill',
@@ -75,6 +75,7 @@ export default function Restaurants() {
       price: 'S/ 18.50'
     },
     {
+      id: '5',
       image: '/imagenes/burritos texmex.jpeg',
       logo: '/imagenes/burritos texmex.jpeg',
       name: 'Tex Mex Dulce',
