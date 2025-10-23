@@ -16,7 +16,7 @@ const NavLinks: FC<NavLinksProps> = ({ isMobile = false }) => {
 
   return (
     <nav className={`flex ${isMobile ? 'flex-col gap-1 p-1' : 'items-center gap-5'} ${isMobile ? '' : 'max-middle:hidden'}`}>
-      {links.map(({ href, label, icon: Icon }) => {
+      {NAVIGATION.globals.map(({ href, label, icon: Icon }) => {
         const isActive = pathname === href
         return (
           <Link
