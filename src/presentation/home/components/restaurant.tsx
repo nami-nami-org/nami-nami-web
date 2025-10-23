@@ -1,7 +1,6 @@
-import RestaurantCard from './restaurantcard'
+import RestaurantCard from '@/shared/ui/components/RestaurantCard'
 
 export default function Restaurants() {
-  // Array de restaurantes
   const restaurants = [
     {
       id: '1',

@@ -16,7 +16,7 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({ image, logo, name, rati
   return (
     <Link
       href={`/restaurants/${id}`}
-      className='bg-bg2 hover:bg-bg3 border-bg3 flex w-[380px] flex-col overflow-hidden rounded-xl border'
+      className='bg-bg2 hover:bg-bg3 border-bg3 flex w-[380px] flex-col overflow-hidden rounded-xl border transition-shadow hover:shadow-lg'
     >
       <div className='relative h-[120px] w-full'>
         <Image layout='fullWidth' src={image} alt={name} height={120} />

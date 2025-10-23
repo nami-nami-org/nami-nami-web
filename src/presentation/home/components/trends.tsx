@@ -1,4 +1,4 @@
-import TrendCard from './trendscard'
+import TrendCard from '../../../shared/ui/components/trendscard'
 
 export default function Trends() {
   const products = [
