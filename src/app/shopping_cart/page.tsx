@@ -1,8 +1,8 @@
-"use client";
+'use client'
 
-import React from "react";
-import CarritoPresentacion from "@/presentation/shopping_cart";
+import CarritoPresentacion from '@/presentation/shopping_cart'
+import React from 'react'
 
 export default function Page() {
-  return <CarritoPresentacion />;
+  return <CarritoPresentacion />
 }
