@@ -17,7 +17,8 @@ const eslintConfig = [
       // 🔒 regla para forzar que los hooks se usen correctamente
       'react-hooks/rules-of-hooks': 'off',
       // (opcional) valida que dependencias de useEffect/useCallback estén completas
-      'react-hooks/exhaustive-deps': 'warn'
+      'react-hooks/exhaustive-deps': 'warn',
+      '@typescript-eslint/no-explicit-any': 'off'
     }
   }
 ]

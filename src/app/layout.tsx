@@ -1,7 +1,7 @@
-import Footer from '@/shared/components/footer/footer'
 import { bodyFonts } from '@/shared/ui/assets/fonts'
 import BenefitBanner from '@/shared/ui/components/BenefitBanner'
 import Nav from '@/shared/ui/components/Nav'
+import Footer from '@/shared/ui/components/footer'
 import { ThemeProvider } from 'next-themes'
 import { ViewTransitions } from 'next-view-transitions'
 import NextTopLoader from 'nextjs-toploader'
