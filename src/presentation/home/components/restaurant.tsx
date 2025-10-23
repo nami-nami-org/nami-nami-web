@@ -46,6 +46,23 @@ export default function Restaurants() {
       rating: 4.9,
       time: '15-25 min',
       price: 'S/ 12.00'
+    },
+
+    {
+      image: '/imagenes/burritos texmex.jpeg',
+      logo: '/imagenes/burritos texmex.jpeg',
+      name: 'Tex Mex Grill',
+      rating: 4.6,
+      time: '25-40 min',
+      price: 'S/ 18.50'
+    },
+    {
+      image: '/imagenes/burritos texmex.jpeg',
+      logo: '/imagenes/burritos texmex.jpeg',
+      name: 'Tex Mex Dulce',
+      rating: 4.9,
+      time: '15-25 min',
+      price: 'S/ 12.00'
     }
   ]
 
