@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { FC, JSX, ReactNode } from 'react'
 import { Mention, MentionsInput, MentionsInputProps, SuggestionDataItem, SuggestionFunc } from 'react-mentions'
 
