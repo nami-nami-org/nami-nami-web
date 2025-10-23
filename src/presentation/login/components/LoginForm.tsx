@@ -1,5 +1,6 @@
-'use client'
+  'use client'
 
+<<<<<<< Updated upstream
 import { userService } from '@/core/services/users.service'
 import Button from '@/shared/ui/components/Button'
 import FormInput from '@/shared/ui/components/FormInput'
@@ -33,38 +34,63 @@ const LoginForm: FC = () => {
       },
       error: 'Error'
     })
+=======
+  import Button from '@/shared/ui/components/Button'
+  import FormInput from '@/shared/ui/components/FormInput'
+  import { ArrowRightIcon } from 'lucide-react'
+  import { redirect } from 'next/navigation'
+  import type { FC } from 'react'
+  import { type SubmitHandler, useForm } from 'react-hook-form'
+  import { toast } from 'sonner'
 
-    redirect('/')
+  import { loginFormValues, loginResolver } from '../schema/LoginSchema'
+  import { userService } from '@/core/services/users.service'
+
+  const LoginForm: FC = () => {
+    const {
+      register,
+      handleSubmit,
+      formState: { errors }
+    } = useForm<loginFormValues>({
+      resolver: loginResolver
+    })
+
+    const onSubmit: SubmitHandler<loginFormValues> = async (data) => {
+      const data2 = await userService.loginQuery(data)
+      console.log('Datos de inicio de sesión:', data2)
+>>>>>>> Stashed changes
+
+      // redirect('/')
+    }
+
+    return (
+      <form className='flex w-fit flex-col gap-5 pl-5' onSubmit={handleSubmit(onSubmit)}>
+        <FormInput
+          type='email'
+          label='Correo Electrónico'
+          placeholder='tucorreo@ejemplo.com'
+          required
+          className='w-[250px]'
+          {...register('email')}
+          error={errors.email?.message}
+        />
+
+        <FormInput
+          type='password'
+          label='Contraseña'
+          placeholder='*********'
+          required
+          className='w-[250px]'
+          {...register('password')}
+          error={errors.password?.message}
+        />
+
+        <Button variant='active' type='submit' className='justify-center'>
+          <span className='text-h4'>Iniciar Sesión</span>
+          <ArrowRightIcon />
+        </Button>
+      </form>
+    )
   }
 
-  return (
-    <form className='flex w-fit flex-col gap-5 pl-5' onSubmit={handleSubmit(onSubmit)}>
-      <FormInput
-        type='email'
-        label='Correo Electrónico'
-        placeholder='tucorreo@ejemplo.com'
-        required
-        className='w-[250px]'
-        {...register('email')}
-        error={errors.email?.message}
-      />
-
-      <FormInput
-        type='password'
-        label='Contraseña'
-        placeholder='*********'
-        required
-        className='w-[250px]'
-        {...register('password')}
-        error={errors.password?.message}
-      />
-
-      <Button variant='active' type='submit' className='justify-center'>
-        <span className='text-h4'>Iniciar Sesión</span>
-        <ArrowRightIcon />
-      </Button>
-    </form>
-  )
-}
-
-export default LoginForm
+  export default LoginForm
