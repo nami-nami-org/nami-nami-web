@@ -1,5 +1,6 @@
 'use client'
 
+import { userService } from '@/core/services/users.service'
 import Button from '@/shared/ui/components/Button'
 import FormInput from '@/shared/ui/components/FormInput'
 import { ArrowRightIcon } from 'lucide-react'
@@ -9,7 +10,6 @@ import { type SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
 import { loginFormValues, loginResolver } from '../schema/LoginSchema'
-import { userService } from '@/core/services/users.service'
 
 const LoginForm: FC = () => {
   const {
@@ -20,12 +20,12 @@ const LoginForm: FC = () => {
     resolver: loginResolver
   })
 
-  const onSubmit: SubmitHandler<loginFormValues> = async (data) => {
+  const onSubmit: SubmitHandler<loginFormValues> = async data => {
     const myPromise = new Promise<loginFormValues>(resolve => {
       setTimeout(() => resolve(data), 1500)
     })
 
-    await userService.loginQuery(data)
+    await userService.login(data)
     toast.promise(myPromise, {
       loading: 'Loading...',
       success: data => {

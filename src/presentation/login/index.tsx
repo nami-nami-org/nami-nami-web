@@ -7,9 +7,9 @@ import LoginForm from './components/LoginForm'
 
 const Login: FC = () => {
   return (
-    <main className='grid h-full w-full flex-1 grid-cols-[1fr_700px] gap-[60px] pt-4'>
-      <section className='relative h-full min-h-[800px]'>
-        <Image className='h-full rounded-t-2xl' src='/assets/login-background.webp' layout='fullWidth' alt='login background' />
+    <main className='mt-10 grid h-full w-full flex-1 grid-cols-[1fr_900px] gap-[60px] pt-4'>
+      <section className='relative h-full min-h-[800px] overflow-hidden rounded-tr-4xl'>
+        <Image className='h-full' src='/assets/login-background.webp' layout='fullWidth' alt='login background' />
 
         <div className='absolute top-10 left-10 flex w-fit flex-col gap-2.5'>
           <h2 className='mb-2 text-2xl font-bold text-white'>
