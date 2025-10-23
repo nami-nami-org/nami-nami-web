@@ -9,8 +9,8 @@ import NavLinks from './NavLinks'
 
 const NavMenu: FC = () => {
   return (
-    <Menu as='div' className='middle:hidden relative'>
-      <MenuButton as={Button} variant='border'>
+    <Menu as='div' className='region:hidden relative'>
+      <MenuButton as={Button}>
         <MenuIcon />
       </MenuButton>
       <MenuItems

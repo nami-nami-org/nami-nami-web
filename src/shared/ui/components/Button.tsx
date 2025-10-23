@@ -1,4 +1,6 @@
+import { cn } from '@/lib/utils'
 import type { ButtonHTMLAttributes, HTMLAttributes, ReactNode } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 const variants = {
   normal: 'bg-bg2 text-fn1',
@@ -26,9 +28,12 @@ type ButtonAsDiv = CommonProps &
 
 type ButtonProps = ButtonAsButton | ButtonAsDiv
 
-const Button = ({ children, className = '', asClass = false, variant = 'normal', noHover = false, ...props }: ButtonProps) => {
-  const hoverClass = noHover ? '' : 'hover:opacity-90'
-  const baseClasses = `w-fit focus:outline-none flex items-center gap-2 rounded-xl p-3 ${variants[variant]} ${hoverClass} ${className}`
+const Button = ({ children, className, asClass = false, variant = 'transparent', noHover = false, ...props }: ButtonProps) => {
+  const hoverClass = noHover ? '' : 'hover:opacity-95 hover:scale-[0.99] transition-all duration-150 ease-in-out'
+
+  const baseClasses = twMerge(
+    cn('w-fit focus:outline-none flex items-center gap-2 rounded-xl p-3', variants[variant], hoverClass, className)
+  )
 
   if (asClass) {
     return (

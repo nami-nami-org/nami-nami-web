@@ -10,8 +10,8 @@ import NavMenu from './NavMenu'
 
 const Nav: FC = () => {
   return (
-    <header className='bg-bg1 sticky top-0 z-50 w-full'>
-      <div className='max-middle:justify-center m-auto flex w-full max-w-[1200px] flex-wrap items-center justify-between gap-2.5 pt-2 max-xl:px-2.5'>
+    <header className='bg-bg2 sticky top-0 z-50 w-full p-3'>
+      <div className='max-region:justify-center region m-auto flex flex-wrap items-center justify-between gap-2.5 max-xl:px-2.5'>
         <div className='flex flex-row items-center gap-7'>
           <Link href='/' className='flex items-center gap-2.5'>
             <Logo />
@@ -43,7 +43,7 @@ const Nav: FC = () => {
           <Link href='/login'>
             <Button asClass variant='active'>
               <UserIcon />
-              <h4 className='text-fnA block max-xl:hidden'>Iniciar sesión</h4>
+              <h4 className='text-fnA block'>Iniciar sesión</h4>
             </Button>
           </Link>
         </div>
