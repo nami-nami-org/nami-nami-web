@@ -1,28 +1,5 @@
 @import 'tailwindcss';
 
-:root {
-  --bg1: oklch(100% 0.00011 271.152);
-  --bg2: oklch(96.248% 0.00294 307.138);
-  --bg3: oklch(90.975% 0.0001 271.152);
-  --fn1: oklch(28.61% 0.0313 82.724);
-  --fn2: oklch(47.612% 0.02906 89.304);
-  --fnA: oklch(95.823% 0.02231 45.412);
-  --tn1: oklch(63.065% 0.19884 28.914);
-  --tn2: oklch(72.561% 0.0882 65.091);
-}
-
-[data-theme='dark'],
-html.dark {
-  --bg1: oklch(15% 0.003 270);
-  --bg2: oklch(20% 0.004 280);
-  --bg3: oklch(25% 0.005 290);
-  --fn1: oklch(92% 0.01 95);
-  --fn2: oklch(80% 0.015 95);
-  --fnA: oklch(95% 0.03 45);
-  --tn1: oklch(70% 0.2 28.914);
-  --tn2: oklch(75% 0.1 65.091);
-}
-
 @theme {
   --color-bg1: var(--bg1);
   --color-bg2: var(--bg2);
@@ -32,28 +9,36 @@ html.dark {
   --color-fnA: var(--fnA);
   --color-tn1: var(--tn1);
   --color-tn2: var(--tn2);
-  --font-roboto: var(--font-roboto);
-  --font-instrument: var(--font-instrument);
-  --font-emojis: var(--font-emojis);
+
+  --color-from: var(--gr-from);
+  --color-via: var(--gr-via);
+  --color-to: var(--gr-to);
+
+  --font-geist: var(--font-geist), sans-serif;
+  --font-geist-mono: var(--font-geist-mono), sans-serif;
+  --font-instrument: var(--font-instrument), cursive;
+  --font-emojis: var(--font-emojis), 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emojis', sans-serif;
+
   --text-h1: 2rem; /* 32px */
-  --text-h2: 1.5rem; /* 24px */
+  --text-h2: 1.7rem; /* 24px */
   --text-h3: 1.25rem; /* 20px */
-  --text-h4: 1rem; /* 16px */
-  --text-h5: 0.875rem; /* 14px */
-  --text-h6: 0.75rem; /* 12px */
-  --text-p: 1rem; /* 16px */
+  --text-h4: 1.1rem; /* 16px */
+  --text-h5: 1rem; /* 14px */
+  --text-p: 1.05rem; /* 16px */
   --text-a: 1rem; /* 16px */
   --text-span: 0.8rem; /* 14px */
-  --breakpoint-middle: 54rem;
+
+  --breakpoint-region: 71rem;
+  --breakpoint-min: 25rem;
 }
 
 @layer base {
   html {
-    font-size: 14px;
+    @apply scroll-smooth text-[12px];
   }
 
   .no-scrollbar::-webkit-scrollbar {
-    display: none;
+    @apply hidden;
   }
 
   .no-scrollbar {
@@ -61,81 +46,70 @@ html.dark {
     scrollbar-width: none;
   }
 
+  .region {
+    @apply w-full max-w-[1200px];
+  }
+
   body {
-    font-family: var(--font-roboto), var(--font-emojis), Arial, Helvetica, sans-serif;
-    background-color: var(--bg1);
-    color: var(--fn1);
+    @apply bg-bg1 font-[var(--font-geist),var(--font-emoji),Arial,Helvetica,sans-serif] text-[var(--fn1)];
   }
 
   ::selection {
-    background-color: var(--tn1);
-    color: var(--fnA);
+    @apply bg-fn1 text-bg1;
   }
 
   .lucide {
-    display: block;
-    width: 22px;
-    height: 22px;
-    stroke-width: 2;
+    @apply block h-[22px] w-[22px] stroke-2;
   }
 
   /* Headings */
   h1 {
-    font-size: var(--text-h1);
-    font-weight: bold;
+    @apply text-h1 font-bold;
   }
 
   h2 {
-    font-size: var(--text-h2);
+    @apply text-h2;
   }
 
   h3 {
-    font-size: var(--text-h3);
+    @apply text-h3;
   }
 
   h4 {
-    font-size: var(--text-h4);
+    @apply text-h4;
   }
 
   h5 {
-    font-size: var(--text-h5);
-  }
-
-  h6 {
-    font-size: var(--text-h6);
+    @apply text-h5;
   }
 
   p,
   input,
   textarea,
   select {
-    font-size: var(--text-p);
+    @apply text-p;
   }
 
-  span {
-    font-size: var(--text-span);
+  span,
+  label {
+    @apply text-span;
   }
 
   p + p {
-    margin-top: 1rem;
+    @apply mt-4;
   }
 
   a {
-    font-size: var(--text-a);
-    text-decoration: none;
-  }
-
-  label {
-    font-size: var(--text-h6);
+    @apply text-a no-underline;
   }
 
   input:focus,
   textarea:focus,
   select:focus {
-    outline: none;
+    @apply outline-none;
   }
 
   button {
-    cursor: pointer;
+    @apply cursor-pointer;
   }
 }
