@@ -17,8 +17,8 @@ const NavLinks: FC<NavLinksProps> = ({ isMobile = false }) => {
 
   const links = [
     { href: '/', label: 'Inicio', icon: HomeIcon },
-    { href: '/platillos', label: 'Platillos', icon: () => <Icon iconNode={bowlChopsticks} /> },
-    { href: '/restaurantes', label: 'Restaurantes', icon: ChefHatIcon },
+    { href: '/dishes', label: 'Platillos', icon: () => <Icon iconNode={bowlChopsticks} /> },
+    { href: '/restaurant', label: 'Restaurantes', icon: ChefHatIcon },
     { href: '/veganos', label: 'Veganos', icon: SaladIcon }
   ]
 
