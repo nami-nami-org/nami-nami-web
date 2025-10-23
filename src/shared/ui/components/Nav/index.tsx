@@ -34,9 +34,11 @@ const Nav: FC = () => {
           <ThemeChanger />
           <NavMenu />
 
-          <Button variant='border'>
-            <ShoppingCartIcon />
-          </Button>
+          <Link href='/shopping_cart'>
+            <Button asClass variant='border'>
+              <ShoppingCartIcon />
+            </Button>
+          </Link>
 
           <Link href='/login'>
             <Button asClass variant='active'>
