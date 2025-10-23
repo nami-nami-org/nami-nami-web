@@ -12,13 +12,13 @@ export function Filters() {
   }
 
   return (
-    <div className='m-auto flex w-full max-w-[600px] flex-wrap justify-center gap-3.5'>
+    <div className='m-auto flex w-full max-w-[800px] flex-wrap justify-center gap-3.5'>
       {filterOptions.map(option => (
         <button
           key={option.id}
           type='button'
           onClick={() => handleAddFilter(option)}
-          className='bg-bg1 text-fn1 hover:bg-bg3 rounded-full px-4 py-2 text-sm shadow-sm transition'
+          className='bg-bg2 text-fn1 hover:bg-bg3 rounded-full px-4 py-2 text-sm transition'
         >
           <h4>{option.display}</h4>
         </button>

@@ -42,12 +42,12 @@ const SearchArea: FC = () => {
   }
 
   return (
-    <div className='no-scrollbar h-[100px] overflow-y-scroll'>
+    <div className='no-scrollbar h-[100px] overflow-y-scroll p-3.5'>
       <MentionInput
         data={filterOptions}
         onChange={setQuery}
         query={query}
-        className='text-h3 min-h-[100px] w-[500px] border-none'
+        className='text-h3 min-h-[50px] w-[500px] border-none'
         mentionClassName='bg-red-100 border border-bg3'
         onKeyDown={handleKeyDown}
         renderSuggestion={(suggestion, focused) => {
