@@ -1,5 +1,6 @@
 'use client'
 
+import { userService } from '@/core/services/users.service'
 import Button from '@/shared/ui/components/Button'
 import FormInput from '@/shared/ui/components/FormInput'
 import { ArrowRightIcon } from 'lucide-react'
@@ -19,11 +20,12 @@ const LoginForm: FC = () => {
     resolver: loginResolver
   })
 
-  const onSubmit: SubmitHandler<loginFormValues> = data => {
+  const onSubmit: SubmitHandler<loginFormValues> = async data => {
     const myPromise = new Promise<loginFormValues>(resolve => {
       setTimeout(() => resolve(data), 1500)
     })
 
+    await userService.login(data)
     toast.promise(myPromise, {
       loading: 'Loading...',
       success: data => {
