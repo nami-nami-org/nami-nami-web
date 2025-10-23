@@ -20,13 +20,13 @@
   --font-emojis: var(--font-emojis), 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emojis', sans-serif;
 
   --text-h1: 2rem; /* 32px */
-  --text-h2: 1.7rem; /* 24px */
-  --text-h3: 1.25rem; /* 20px */
+  --text-h2: 1.6rem; /* 24px */
+  --text-h3: 1.2rem; /* 20px */
   --text-h4: 1.1rem; /* 16px */
   --text-h5: 1rem; /* 14px */
-  --text-p: 1.05rem; /* 16px */
+  --text-p: 1rem; /* 16px */
   --text-a: 1rem; /* 16px */
-  --text-span: 0.8rem; /* 14px */
+  --text-span: 0.9rem; /* 14px */
 
   --breakpoint-region: 71rem;
   --breakpoint-min: 25rem;
@@ -34,7 +34,7 @@
 
 @layer base {
   html {
-    @apply scroll-smooth text-[12px];
+    @apply scroll-smooth text-[14px];
   }
 
   .no-scrollbar::-webkit-scrollbar {
@@ -84,6 +84,7 @@
   }
 
   p,
+  li,
   input,
   textarea,
   select {

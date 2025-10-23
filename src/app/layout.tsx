@@ -26,10 +26,10 @@ const Bootstrap: FC<Props> = ({ children }) => {
             <Toaster position='top-center' />
             <NextTopLoader color='var(--tn1)' showSpinner={false} />
             <ThemeProvider defaultTheme='system' enableSystem attribute={'class'} disableTransitionOnChange>
+              <BenefitBanner />
               <Nav />
-              {/* <BenefitBanner /> */}
               {children}
-              {/* <Footer /> */}
+              <Footer />
             </ThemeProvider>
           </Providers>
         </body>
