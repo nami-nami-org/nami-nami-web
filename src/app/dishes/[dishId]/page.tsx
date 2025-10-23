@@ -5,8 +5,8 @@ interface DishPageProps {
   params: { dishId: string }
 }
 
-const DishPage: FC<DishPageProps> = ({ params }) => {
-  const { dishId } = params
+const DishPage: FC<DishPageProps> = async ({ params }) => {
+  const { dishId } = await params
   return <Dish dishId={dishId} />
 }
 
