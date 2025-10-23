@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 import type { FC } from 'react'
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
-
+import { userService } from '@/core/services/users.service'
 import { registerFormValues, registerResolver } from '../schema/RegisterSchema'
 
 const RegisterForm: FC = () => {
@@ -33,34 +33,31 @@ const RegisterForm: FC = () => {
 
   const termsChecked = watch('terms')
 
-  const onSubmit: SubmitHandler<registerFormValues> = data => {
-    const myPromise = new Promise<registerFormValues>(resolve => {
-      setTimeout(() => resolve(data), 1500)
-    })
-
-    toast.promise(myPromise, {
-      loading: 'Registrando...',
-      success: data => {
-        const dataForBackend = {
-          nombre: data.name,
-          email: data.email,
-          contraseña: data.password,
-          teléfono: data.phone || null
-        }
-        console.log('Datos a enviar al backend (propiedades en español):', dataForBackend)
-
-        return `Cuenta ${data.email} registrada exitosamente!`
-      },
-      error: 'Error al registrar la cuenta'
-    })
-
-    myPromise.then(() => {
-      router.push('/terms')
-    })
+  const onSubmit: SubmitHandler<registerFormValues> = async (data) => {
+    toast.promise(
+      userService.createUser({
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        phone: data.phone
+      }),
+      {
+        loading: 'Creando tu cuenta...',
+        success: () => {
+          // Opcional: redirigir después de crear la cuenta
+          router.push('/login')
+          return 'Cuenta creada exitosamente.'
+        },
+        error: (err) => err.message || 'Error al crear la cuenta. Intenta de nuevo.'
+      }
+    )
   }
 
   return (
-    <form className='flex w-fit flex-col gap-5 pl-5' onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className='flex w-fit flex-col gap-5 pl-5'
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <FormInput
         type='text'
         label='Nombre'
@@ -122,24 +119,38 @@ const RegisterForm: FC = () => {
                 id='terms'
                 className='accent-tn1'
                 checked={field.value}
-                onChange={e => field.onChange(e.target.checked)}
+                onChange={(e) => field.onChange(e.target.checked)}
                 onBlur={field.onBlur}
                 name={field.name}
                 ref={field.ref}
               />
               <label htmlFor='terms' className='text-fnt-secondary text-sm'>
                 Acepto los&nbsp;
-                <Link href='/terms' className='underline' target='_blank' rel='noopener noreferrer'>
+                <Link
+                  href='/terms'
+                  className='underline'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
                   Términos y Condiciones
                 </Link>
               </label>
             </div>
-            {fieldState.error && <span className='text-xs text-red-500'>{fieldState.error.message}</span>}
+            {fieldState.error && (
+              <span className='text-xs text-red-500'>
+                {fieldState.error.message}
+              </span>
+            )}
           </div>
         )}
       />
 
-      <Button variant='active' type='submit' className='justify-center' disabled={!termsChecked}>
+      <Button
+        variant='active'
+        type='submit'
+        className='justify-center'
+        disabled={!termsChecked}
+      >
         <span className='text-h4'>Registrarse</span>
         <ArrowRightIcon />
       </Button>
