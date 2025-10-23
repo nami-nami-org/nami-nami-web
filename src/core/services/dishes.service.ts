@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import nami_api from './root.service'
+// import nami_api from './root.service'
 
 async function getAllDishes() {
   try {
