@@ -21,7 +21,7 @@ const themes: Theme[] = [
 
 const ThemeChanger = () => {
   const { theme, setTheme } = useTheme()
-  const [selectedTheme, setSelectedTheme] = useState<Theme>(themes.find(t => t.id === theme) || themes[1])
+  const [selectedTheme, setSelectedTheme] = useState<Theme>(themes.find(t => t.id === theme) || themes[0])
 
   const handleThemeChange = (newTheme: Theme) => {
     setSelectedTheme(newTheme)
@@ -29,21 +29,33 @@ const ThemeChanger = () => {
   }
 
   return (
-    <div className='w-fit text-right'>
+    <div className='relative text-right'>
       <Menu>
-        <MenuButton as={Button} variant='border'>
-          <selectedTheme.icon className='text-fn1 h-5 w-5' />
+        <MenuButton as={Button}>
+          <selectedTheme.icon />
         </MenuButton>
 
-        <MenuItems anchor='bottom end' className='bg-bg2 w-32 origin-bottom-right rounded-md p-1 shadow-lg focus:outline-none'>
-          {themes.map(t => (
-            <MenuItem key={t.id}>
-              <Button onClick={() => handleThemeChange(t)} className={`w-full ${selectedTheme.id === t.id ? 'bg-bg3' : ''}`}>
-                <t.icon className='text-fn1 h-4 w-4' />
-                <h4 className='text-fn2'>{t.name}</h4>
-              </Button>
-            </MenuItem>
-          ))}
+        <MenuItems
+          anchor='bottom end'
+          className='bg-bg1 border-bg3 mt-5 w-64 origin-top-right overflow-hidden rounded-xl border shadow-xl outline-none'
+        >
+          <div className='bg-bg3 flex items-center justify-between px-4 py-3'>
+            <h3 className='font-semibold tracking-wide'>🎨 Tema</h3>
+          </div>
+
+          <div className='space-y-2 p-3'>
+            {themes.map(t => (
+              <MenuItem key={t.id}>
+                <Button
+                  onClick={() => handleThemeChange(t)}
+                  className={`w-full hover:scale-100 ${selectedTheme.id === t.id ? 'bg-bg3 font-medium' : 'hover:bg-bg2'}`}
+                >
+                  <t.icon className='h-5 w-5' />
+                  <p className='text-fn2'>{t.name}</p>
+                </Button>
+              </MenuItem>
+            ))}
+          </div>
         </MenuItems>
       </Menu>
     </div>

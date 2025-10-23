@@ -5,11 +5,11 @@ import type { FC } from 'react'
 
 const BenefitBanner: FC = () => {
   return (
-    <header className='bg-bg2 mx-auto my-2.5 flex w-full max-w-[1200px] flex-wrap items-center justify-center gap-5 rounded-lg px-2 py-4'>
-      <div className='max-middle:px-2.5 flex items-center justify-center gap-2.5'>
+    <header className='bg-bg2 mx-auto flex w-full flex-wrap items-center justify-center gap-5 rounded-lg px-2 py-4'>
+      <div className='max-region:px-2.5 flex items-center justify-center gap-2.5'>
         <Image src='/assets/CookingPot.webp' width={35} height={35} alt='CookingPot' />
 
-        <p className='text-fn1 max-middle:text-left max-middle:text-wrap max-middle:max-w-[400px] text-center text-nowrap'>
+        <p className='text-fn1 max-region:text-left max-region:text-wrap max-region:max-w-[400px] text-center text-nowrap'>
           Descubre todos tus beneficios: <strong>tú cocinas con Ñami Ñami</strong> y nosotros nos encargamos del resto.
         </p>
       </div>
