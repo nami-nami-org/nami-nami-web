@@ -7,7 +7,7 @@ interface Props {
   dishId: string
 }
 
-const DishDetails: FC<Props> = ({ dishId }) => {
+const DishDetails: FC<Props> = ({}) => {
   return (
     <div className='grid gap-8 lg:grid-cols-2'>
       {/* Image Section */}
