@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-
-bun x --no -- commitlint --edit $1
