@@ -77,13 +77,12 @@ export default function PlatillosPage() {
 
   return (
     <div className='bg-bg1 min-h-screen'>
-      {/* Filtros de categoría */}
+      {/* Filtros arriba */}
       <CategoryFilters categories={categories} selectedCategory={selectedCategory} onSelectCategory={setSelectedCategory} />
 
-      {/* Contenedor principal */}
       <div className='mx-auto max-w-[1400px] px-4 py-6'>
         <div className='flex gap-6'>
-          {/* 🧱 Panel lateral de filtros */}
+          {/* Panel lateral */}
           <FilterPanel
             sortOptions={sortOptions}
             companySize={companySize}
@@ -93,9 +92,8 @@ export default function PlatillosPage() {
             onSelectCompanySize={setSelectedCompanySize}
           />
 
-          {/* 🍽 Contenido principal */}
+          {/* Contenido */}
           <main className='flex-1'>
-            {/* Barra de búsqueda */}
             <div className='mb-6'>
               <div className='bg-bg2 border-bg3 flex items-center gap-2 rounded-lg border px-4 py-3'>
                 <input
@@ -103,19 +101,19 @@ export default function PlatillosPage() {
                   placeholder='Se me antojó...'
                   className='text-fn1 placeholder:text-fn2 flex-1 bg-transparent outline-none'
                 />
+
                 <button className='hover:bg-bg3 rounded p-1 transition-colors'>
                   <Mic className='text-fn2 h-5 w-5' />
                 </button>
+
                 <button className='hover:bg-bg3 rounded p-1 transition-colors'>
                   <Search className='text-fn1 h-5 w-5' />
                 </button>
               </div>
             </div>
 
-            {/* Título */}
             <h2 className='text-fn1 mb-6 text-2xl font-bold'>Platillos</h2>
 
-            {/* 🧆 Lista de platillos */}
             <div className='grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3'>
               {dishes.map(rest => (
                 <RestaurantCard key={rest.id} {...rest} />
