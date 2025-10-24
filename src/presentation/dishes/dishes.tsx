@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Mic, Search } from "lucide-react";
 import CategoryFilters from "./CategoryFilters";
 import FilterPanel from "./FilterPanel";
-import RestaurantCard from "../home/components/restaurantcard";
+import RestaurantCard from "@/shared/ui/components/RestaurantCard";
 
 export default function PlatillosPage() {
   const [selectedCategory, setSelectedCategory] = useState("Todos");
