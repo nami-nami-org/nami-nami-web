@@ -1,7 +1,7 @@
 "use client"
 
 import { Star, Clock, Phone } from "lucide-react"
-import Link from 'next/link'    
+    
 
 interface RestaurantTargetProps {
   id: number
@@ -12,7 +12,7 @@ interface RestaurantTargetProps {
   phone: string
 }
 
-export default function RestaurantsTarget({ id, name, image, time, description, phone }: RestaurantTargetProps) {
+export default function RestaurantTarget({ id, name, image, time, description, phone }: RestaurantTargetProps) {
   return (
     <div className="bg-bg2 rounded-xl overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
       {/* Imagen del restaurante */}

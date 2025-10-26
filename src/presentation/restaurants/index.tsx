@@ -86,9 +86,7 @@ export default function RestaurantsTarget() {
 
 	return (
 		<div className="bg-bg1 min-h-screen">
-			{/* Optional header for cart flow (kept for consistency with imports) */}
 			
-
 			{/* Category chips */}
 			<CategoryFilters
 				categories={categories}
