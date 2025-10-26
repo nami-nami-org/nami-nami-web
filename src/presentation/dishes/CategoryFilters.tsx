@@ -13,7 +13,7 @@ interface CategoryFiltersProps {
 
 export default function CategoryFilters({ categories, selectedCategory, onSelectCategory }: CategoryFiltersProps) {
   return (
-    <div className="bg-bg1 border-b border-bg3 sticky top-[73px] z-40">
+    <div className="bg-bg1 border-b border-bg3 sticky top-[73px] z-40 flex items-center justify-center">
       <div className="max-w-[1400px] mx-auto px-4 py-4">
         <div className="flex gap-2 overflow-x-auto no-scrollbar">
           {categories.map((category) => (
