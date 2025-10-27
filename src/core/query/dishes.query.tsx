@@ -12,6 +12,16 @@ const getAllDishes = () => {
   })
 }
 
+const getDishById = (id: number | string) => {
+  return useQuery({
+    queryKey: ['get-dish-by-id', id],
+    queryFn: () => dishesService.getDishById(id),
+    enabled: !!id, // solo ejecuta si hay un id válido
+    staleTime: 1000 * 60 * 5
+  })
+}
+
 export const useDishesQuery = {
-  getAllDishes
+  getAllDishes,
+  getDishById
 }

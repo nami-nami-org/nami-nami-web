@@ -9,9 +9,10 @@ const DishesList: React.FC = () => {
   if (isError) return <p>Jeff gordo 😀</p>
   if (isLoading || !data) return <BigDishListSkeleton />
 
+  console.log('data dishes', data)
   return (
     <div className='flex flex-wrap justify-center gap-5'>
-      {data.map((dish, index) => (
+      {data.map((dish: any, index: any) => (
         <BigDishCard key={index} {...dish} />
       ))}
     </div>

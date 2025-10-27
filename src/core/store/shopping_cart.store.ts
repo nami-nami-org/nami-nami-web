@@ -17,28 +17,12 @@ interface CartState {
   removeFromCart: (id: number) => void;
   clearCart: () => void;
   getTotal: () => number;
+  getItemsCount: () => number; // <-- Nuevo
 }
 
 export const useCartStore = create<CartState>((set, get) => ({
   items: [
-    {
-      id: 1,
-      name: "Arroz con Pollo",
-      description: "Taza Vicentina",
-      time: "25 - 20 min",
-      price: 14.0,
-      quantity: 3,
-      image: "/arroz-con-pollo-peruano.jpg",
-    },
-    {
-      id: 2,
-      name: "Arroz con Pollo",
-      description: "Taza Vicentina",
-      time: "25 - 20 min",
-      price: 14.0,
-      quantity: 3,
-      image: "/arroz-con-pollo-peruano.jpg",
-    },
+    
   ],
 
   addToCart: (product) => {
@@ -79,5 +63,9 @@ export const useCartStore = create<CartState>((set, get) => ({
       (acc, p) => acc + p.price * (p.quantity || 1),
       0
     );
+  },
+
+  getItemsCount: () => {
+    return get().items.reduce((acc, p) => acc + (p.quantity || 1), 0);
   },
 }));

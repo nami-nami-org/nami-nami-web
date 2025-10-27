@@ -1,17 +1,21 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { Mic, Search } from "lucide-react";
-import CategoryFilters from "./CategoryFilters";
-import FilterPanel from "./FilterPanel";
-import RestaurantCard from "@/shared/ui/components/RestaurantCard";
+import { useDishesQuery } from '@/core/query/dishes.query'
+import BigDishCard from '@/shared/ui/components/BigDishCard'
+import BigDishListSkeleton from '@/shared/ui/components/BigDishCard/BigDishListSkeleton'
+
+import { Mic, Search } from 'lucide-react'
+import { useState } from 'react'
+import CategoryFilters from './components/CategoryFilters'
+import FilterPanel from './components/FilterPanel'
 
 export default function PlatillosPage() {
-  const [selectedCategory, setSelectedCategory] = useState("Todos");
-  const [selectedSort, setSelectedSort] = useState("Más reseñas");
-  const [selectedCompanySize, setSelectedCompanySize] = useState("Grande");
+  const { data, isLoading, isError } = useDishesQuery.getAllDishes()
+  const [selectedCategory, setSelectedCategory] = useState("Todos")
+  const [selectedSort, setSelectedSort] = useState("Más reseñas")
+  const [selectedCompanySize, setSelectedCompanySize] = useState("Grande")
 
-  // 🧩 Categorías
+  // Categorías, opciones de orden y tamaño de empresa (puedes mantener tus arrays)
   const categories = [
     { name: "Todos", emoji: "" },
     { name: "Algo Picante", emoji: "🌶️" },
@@ -20,77 +24,33 @@ export default function PlatillosPage() {
     { name: "Salchipapas", emoji: "🌭" },
     { name: "Pizza", emoji: "🍕" },
     { name: "Postres", emoji: "🍰" },
-  ];
-
-  // ⭐ Opciones de orden (para el panel)
+  ]
   const sortOptions = [
     { name: "Más reseñas", emoji: "⭐" },
     { name: "Calificación", emoji: "🔥" },
     { name: "Barato", emoji: "💰" },
     { name: "Tiempo de entrega", emoji: "⏱️" },
-  ];
-
-  // 🏪 Tamaño de empresa
+  ]
   const companySize = [
     { name: "Grande", emoji: "🏢" },
     { name: "Mediano", emoji: "🏬" },
     { name: "Pequeño", emoji: "🏠" },
     { name: "Nuevo", emoji: "🆕" },
-  ];
+  ]
 
-  // 🍽 Platillos
-  const dishes = [
-    {
-      id: 1,
-      name: "Nocturnos Tex Mex Surquillo",
-      image: "/tex-mex-food-colorful.jpg",
-      logo: "/tex-mex-food-colorful.jpg",
-      rating: 4.7,
-      time: "20-35 min",
-      price: "S/ 14.90",
-    },
-    {
-      id: 2,
-      name: "Tacos Mexicanos",
-      image: "/tex-mex-tacos-colorful.jpg",
-      logo: "/tex-mex-food-colorful.jpg",
-      rating: 4.5,
-      time: "15-25 min",
-      price: "S/ 12.90",
-    },
-    {
-      id: 3,
-      name: "Ceviche Clásico",
-      image: "/mexican-food-platter.jpg",
-      logo: "/tex-mex-food-colorful.jpg",
-      rating: 4.8,
-      time: "30-40 min",
-      price: "S/ 18.50",
-    },
-    {
-      id: 4,
-      name: "Burrito Especial",
-      image: "/tex-mex-burrito-bowl.jpg",
-      logo: "/tex-mex-food-colorful.jpg",
-      rating: 4.6,
-      time: "20-35 min",
-      price: "S/ 16.00",
-    },
-  ];
+  if (isError) return <p>Error al cargar los platillos.</p>
+  if (isLoading || !data) return <BigDishListSkeleton />
 
   return (
     <div className="min-h-screen bg-bg1">
-      {/* Filtros de categoría */}
       <CategoryFilters
         categories={categories}
         selectedCategory={selectedCategory}
         onSelectCategory={setSelectedCategory}
       />
 
-      {/* Contenedor principal */}
       <div className="max-w-[1400px] mx-auto px-4 py-6">
         <div className="flex gap-6">
-          {/* 🧱 Panel lateral de filtros */}
           <FilterPanel
             sortOptions={sortOptions}
             companySize={companySize}
@@ -100,9 +60,7 @@ export default function PlatillosPage() {
             onSelectCompanySize={setSelectedCompanySize}
           />
 
-          {/* 🍽 Contenido principal */}
           <main className="flex-1">
-            {/* Barra de búsqueda */}
             <div className="mb-6">
               <div className="flex items-center gap-2 bg-bg2 rounded-lg px-4 py-3 border border-bg3">
                 <input
@@ -119,18 +77,16 @@ export default function PlatillosPage() {
               </div>
             </div>
 
-            {/* Título */}
             <h2 className="text-2xl font-bold text-fn1 mb-6">Platillos</h2>
 
-            {/* 🧆 Lista de platillos */}
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {dishes.map((rest) => (
-                <RestaurantCard key={rest.id} {...rest} />
+              {data.map((dish: any, index: number) => (
+                <BigDishCard key={index} {...dish} />
               ))}
             </div>
           </main>
         </div>
       </div>
     </div>
-  );
+  )
 }

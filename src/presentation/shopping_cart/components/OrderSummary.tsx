@@ -1,6 +1,7 @@
 "use client"
 import React from "react"
 import { CreditCard } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 interface Props {
   subtotal: number
@@ -10,6 +11,12 @@ interface Props {
 }
 
 export default function OrderSummary({ subtotal, envio, servicio, total }: Props) {
+  const router = useRouter()
+
+  const handlePayment = () => {
+    router.push("/payment-cart")
+  }
+
   return (
     <div className="bg-bg2 rounded-2xl p-8 shadow-md sticky top-6 border border-bg3">
       <h3 className="font-bold text-h3 mb-6 flex items-center gap-2">
@@ -39,7 +46,10 @@ export default function OrderSummary({ subtotal, envio, servicio, total }: Props
         </div>
       </div>
 
-      <button className="w-full bg-tn1 text-fnA py-4 rounded-xl font-bold text-lg hover:opacity-90 transition-opacity mb-3 shadow-md">
+      <button
+        className="w-full bg-tn1 text-fnA py-4 rounded-xl font-bold text-lg hover:opacity-90 transition-opacity mb-3 shadow-md"
+        onClick={handlePayment}
+      >
         Procesar Pago
       </button>
 

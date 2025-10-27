@@ -1,23 +1,32 @@
+"use client"
+
+import { useDishesQuery } from '@/core/query/dishes.query'
 import StarRating from '@/shared/ui/components/StarRating'
-import { Image } from '@unpic/react/nextjs'
+import { Image } from '@unpic/react'
 import { Clock, Heart, Info, MapPin, ShoppingCart } from 'lucide-react'
 import type { FC } from 'react'
+import Layout from '../../../../.next/types/routes';
 
 interface Props {
   dishId: string
 }
 
-const DishDetails: FC<Props> = ({}) => {
+const DishDetails: FC<Props> = ({ dishId }) => {
+  const { data: dish } = useDishesQuery.getDishById(dishId)
+
+  if (!dish) return <p className="text-fn2">🍽️ Cargando plato...</p>
+  if (!dishId) return <p className="text-fn2">🍽️ ID de plato no válido</p>
+
   return (
     <div className='grid gap-8 lg:grid-cols-2'>
       {/* Image Section */}
       <div className='space-y-4'>
         <div className='bg-bg2 relative aspect-[4/3] overflow-hidden rounded-2xl'>
           <Image
-            src='/delicious-tex-mex-burrito-with-grilled-meat--veget.jpg'
-            alt='Nocturnos Tex Mex Surquillo'
-            className='object-cover'
-            priority
+            src={dish.imageUrl || '/🍳.jpg'}
+            alt={dish.name || '🍽️'}
+            className='object-cover h-full w-full'
+            layout="fullWidth"
           />
           <button className='bg-bg1/90 hover:bg-bg1 absolute top-4 right-4 flex h-12 w-12 items-center justify-center rounded-full backdrop-blur-sm transition-colors'>
             <Heart className='text-tn1 h-5 w-5' />
@@ -26,18 +35,28 @@ const DishDetails: FC<Props> = ({}) => {
 
         {/* Thumbnail Gallery */}
         <div className='grid grid-cols-4 gap-3'>
-          {[1, 2, 3, 4].map(i => (
-            <div
-              key={i}
-              className='bg-bg2 relative aspect-square cursor-pointer overflow-hidden rounded-lg transition-opacity hover:opacity-80'
-            >
-              <Image
-                src={`/tex-mex-food-detail-.jpg?height=200&width=200&query=tex mex food detail ${i}`}
-                alt={`Vista ${i}`}
-                className='object-cover'
-              />
-            </div>
-          ))}
+          {dish.imageUrls?.length
+            ? dish.imageUrls.map((img: any, i: any) => (
+                <div
+                  key={i}
+                  className='bg-bg2 relative aspect-square cursor-pointer overflow-hidden rounded-lg transition-opacity hover:opacity-80'
+                >
+                  <Image
+                    src={typeof img === 'string' ? img : '/🍛.jpg'}
+                    alt={`Vista ${i + 1}`}
+                    className='object-cover'
+                    layout='fullWidth'
+                  />
+                </div>
+              ))
+            : ['🍲', '🥘', '🍜', '🍛'].map((emoji, i) => (
+                <div
+                  key={i}
+                  className='bg-bg2 flex items-center justify-center aspect-square rounded-lg text-3xl'
+                >
+                  {emoji}
+                </div>
+              ))}
         </div>
       </div>
 
@@ -48,50 +67,54 @@ const DishDetails: FC<Props> = ({}) => {
           <div className='bg-tn1 h-8 w-8 overflow-hidden rounded-full'>
             <Image src='/restaurant-logo.png' alt='Restaurant' width={32} height={32} className='object-cover' />
           </div>
-          <span className='text-fn1 font-medium'>Nocturnos</span>
+          <span className='text-fn1 font-medium'>🍴</span>
         </div>
 
         {/* Title and Rating */}
         <div>
-          <h1 className='font-instrument text-fn1 mb-3 text-4xl'>Tex Mex Surquillo</h1>
+          <h1 className='font-instrument text-fn1 mb-3 text-4xl'>{dish.name || '🍛'}</h1>
           <div className='text-fn2 flex items-center gap-4'>
             <div className='flex items-center gap-1'>
-              <StarRating rating={4.7} />
-              <span className='text-fn1 font-semibold'>4.7</span>
-              <span>(128 reseñas)</span>
+              <StarRating rating={4.5} />
+              <span className='text-fn1 font-semibold'>4.5</span>
+              <span>(⭐ reseñas)</span>
             </div>
             <div className='flex items-center gap-1'>
               <Clock className='h-5 w-5' />
-              <span>20-30 min</span>
+              <span>{dish.prepTime ? `${dish.prepTime} min` : '⏳'}</span>
             </div>
           </div>
         </div>
 
         {/* Price */}
         <div className='flex items-baseline gap-2'>
-          <span className='text-tn1 text-4xl font-bold'>S/ 14.90</span>
-          <span className='text-fn2 line-through'>S/ 18.90</span>
+          <span className='text-tn1 text-4xl font-bold'>S/ {dish.price ?? '💰'}</span>
+          <span className='text-fn2 line-through'>
+            {dish.discount ? `S/ ${(dish.price / (1 - dish.discount)).toFixed(2)}` : '💸'}
+          </span>
         </div>
 
         {/* Description */}
         <div className='space-y-3'>
           <h3 className='text-fn1 text-lg font-semibold'>Descripción</h3>
-          <p className='text-fn2 leading-relaxed'>
-            Delicioso burrito estilo Tex-Mex preparado con tortilla de harina suave, relleno de carne asada jugosa, frijoles
-            negros, arroz mexicano, queso cheddar derretido, pico de gallo fresco, guacamole cremoso y crema ácida. Acompañado de
-            nachos crujientes y salsa picante al lado.
-          </p>
+          <p className='text-fn2 leading-relaxed'>{dish.description || '📝'}</p>
         </div>
 
-        {/* Ingredients/Tags */}
+        {/* Categories */}
         <div className='space-y-3'>
           <h3 className='text-fn1 text-lg font-semibold'>Categorias Principales</h3>
           <div className='flex flex-wrap gap-2'>
-            {['Carne asada', 'Frijoles', 'Queso', 'Guacamole', 'Pico de gallo', 'Tortilla'].map(tag => (
-              <span key={tag} className='bg-bg2 text-fn1 rounded-full px-4 py-2 text-sm'>
-                {tag}
-              </span>
-            ))}
+            {dish.categories?.length
+              ? dish.categories.map((cat: any) => (
+                  <span key={cat.name} className='bg-bg2 text-fn1 rounded-full px-4 py-2 text-sm'>
+                    {cat.name}
+                  </span>
+                ))
+              : ['🍲', '🍚', '🥩'].map((tag, i) => (
+                  <span key={i} className='bg-bg2 text-fn1 rounded-full px-4 py-2 text-sm'>
+                    {tag}
+                  </span>
+                ))}
           </div>
         </div>
 
@@ -101,15 +124,13 @@ const DishDetails: FC<Props> = ({}) => {
             <MapPin className='text-tn1 mt-0.5 h-5 w-5' />
             <div>
               <h4 className='text-fn1 mb-1 font-semibold'>Información de entrega</h4>
-              <p className='text-fn2 text-sm'>
-                Disponible para delivery en Surquillo y distritos cercanos. Tiempo estimado: 20-30 minutos.
-              </p>
+              <p className='text-fn2 text-sm'>📍 Por definir</p>
             </div>
           </div>
           <div className='flex items-start gap-3'>
             <Info className='text-tn1 mt-0.5 h-5 w-5' />
             <div>
-              <p className='text-fn2 text-sm'>Delivery gratis en pedidos mayores a S/ 30.00</p>
+              <p className='text-fn2 text-sm'>🚚 Delivery disponible según zona</p>
             </div>
           </div>
         </div>

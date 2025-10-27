@@ -1,3 +1,5 @@
+'use client'
+
 import { ChevronDown, ShoppingCartIcon, UserIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC } from 'react'
@@ -7,8 +9,11 @@ import Logo from '../Logo'
 import ThemeChanger from '../ThemeChanger'
 import NavLinks from './NavLinks'
 import NavMenu from './NavMenu'
+import { useCartStore } from '@/core/store/shopping_cart.store'
 
 const Nav: FC = () => {
+  const itemsCount = useCartStore(state => state.getItemsCount())
+
   return (
     <header className='bg-bg2 sticky top-0 z-50 w-full p-3'>
       <div className='max-region:justify-center region m-auto flex flex-wrap items-center justify-between gap-2.5 max-xl:px-2.5'>
@@ -35,8 +40,13 @@ const Nav: FC = () => {
           <NavMenu />
 
           <Link href='/shopping_cart'>
-            <Button asClass variant='border'>
+            <Button asClass variant='border' className='relative'>
               <ShoppingCartIcon />
+              {itemsCount > 0 && (
+                <span className='absolute -top-2 -right-2 bg-tn1 text-white text-xs font-bold rounded-full px-2 py-0.5'>
+                  {itemsCount}
+                </span>
+              )}
             </Button>
           </Link>
 
