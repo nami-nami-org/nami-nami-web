@@ -5,6 +5,7 @@ import StarRating from '@/shared/ui/components/StarRating'
 import { Image } from '@unpic/react'
 import { Clock, Heart, Info, MapPin, ShoppingCart } from 'lucide-react'
 import type { FC } from 'react'
+import Layout from '../../../../.next/types/routes';
 
 interface Props {
   dishId: string
