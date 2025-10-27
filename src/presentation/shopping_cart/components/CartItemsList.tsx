@@ -1,5 +1,5 @@
-import { Minus, Plus, Trash2 } from 'lucide-react'
-import Image from 'next/image'
+import { Image } from '@unpic/react'
+import { Trash2 } from 'lucide-react'
 
 interface CartItem {
   id: number
@@ -36,17 +36,16 @@ export default function CartItemsList({ cartItems, updateQuantity, removeItem }:
             <Image
               src={item.image || '/placeholder.svg'}
               alt={item.name}
+              width={112} // 28 * 4 = 112px
+              height={112}
               className='h-28 w-28 flex-shrink-0 rounded-xl object-cover'
             />
             <div className='flex-1'>
               <div className='mb-2 flex items-start justify-between gap-4'>
                 <div>
-                  <h3 className='text-fn1 mb-1 text-lg font-bold'>{item.name}</h3>
-                  <p className='text-fn2 mb-1 text-sm'>{item.description}</p>
-                  <p className='text-fn2 flex items-center gap-1 text-xs'>
-                    <span className='bg-tn1 inline-block h-1.5 w-1.5 rounded-full'></span>
-                    {item.time}
-                  </p>
+                  <h3 className='font-semibold'>{item.name}</h3>
+                  <p className='text-fn2'>{item.description}</p>
+                  <span className='text-xs text-fn2'>Tiempo: {item.time} min</span>
                 </div>
                 <button
                   onClick={() => removeItem(item.id)}
@@ -57,15 +56,21 @@ export default function CartItemsList({ cartItems, updateQuantity, removeItem }:
               </div>
               <div className='mt-4 flex items-center justify-between'>
                 <div className='bg-bg1 border-bg3 flex items-center gap-3 rounded-xl border px-3 py-2'>
-                  <button onClick={() => updateQuantity(item.id, -1)} className='text-fn1 hover:text-tn1 p-1 transition-colors'>
-                    <Minus className='h-4 w-4' />
+                  <button
+                    onClick={() => updateQuantity(item.id, -1)}
+                    className='text-tn1 font-bold px-2'
+                  >
+                    -
                   </button>
-                  <span className='min-w-[24px] text-center font-bold'>{item.quantity}</span>
-                  <button onClick={() => updateQuantity(item.id, 1)} className='text-fn1 hover:text-tn1 p-1 transition-colors'>
-                    <Plus className='h-4 w-4' />
+                  <span className='font-semibold'>{item.quantity}</span>
+                  <button
+                    onClick={() => updateQuantity(item.id, 1)}
+                    className='text-tn1 font-bold px-2'
+                  >
+                    +
                   </button>
                 </div>
-                <span className='text-tn1 text-xl font-bold'>S/ {(item.price * item.quantity).toFixed(2)}</span>
+                <span className='text-tn1 text-xl font-bold'>S/ {item.price.toFixed(2)}</span>
               </div>
             </div>
           </div>

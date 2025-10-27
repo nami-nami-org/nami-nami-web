@@ -88,7 +88,7 @@ export default function Restaurants() {
   return (
     <div className='flex flex-wrap gap-5'>
       {restaurants.map((rest, index) => (
-        <RestaurantCard key={index} {...rest} />
+        <RestaurantCard key={index} {...rest} className="w-[380px]" />
       ))}
     </div>
   )

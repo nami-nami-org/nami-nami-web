@@ -10,13 +10,14 @@ interface RestaurantCardProps {
   rating: number | string
   time: string
   price: string
+  className?: string
 }
 
-const RestaurantCard: React.FC<RestaurantCardProps> = ({ image, logo, name, rating, time, price, id }) => {
+const RestaurantCard: React.FC<RestaurantCardProps> = ({ image, logo, name, rating, time, price, id, className }) => {
   return (
     <Link
       href={`/restaurants/${id}`}
-      className='bg-bg2 hover:bg-bg3 border-bg3 flex w-[380px] flex-col overflow-hidden rounded-xl border transition-shadow hover:shadow-lg'
+      className={`bg-bg2 hover:bg-bg3 border-bg3 flex flex-col overflow-hidden rounded-xl border transition-shadow hover:shadow-lg ${className}`}
     >
       <div className='relative h-[120px] w-full'>
         <Image layout='fullWidth' src={image} alt={name} height={120} />

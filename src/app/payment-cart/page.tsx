@@ -1,8 +1,8 @@
-"use client";
+'use client'
 
-import React from "react";
-import PaymentCart from "@/presentation/payment-cart";
+import PaymentCart from '@/presentation/payment-cart'
+import React from 'react'
 
 export default function Page() {
-  return <PaymentCart />;
+  return <PaymentCart />
 }

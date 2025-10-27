@@ -1,8 +1,7 @@
 'use client'
 
-import Button from '@/shared/ui/components/Button'
 import { CreditCard } from 'lucide-react'
-import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 interface Props {
@@ -13,6 +12,12 @@ interface Props {
 }
 
 export default function OrderSummary({ subtotal, envio, servicio, total }: Props) {
+  const router = useRouter()
+
+  const handlePayment = () => {
+    router.push('/payment-cart')
+  }
+
   return (
     <div className='bg-bg2 border-bg3 sticky top-6 rounded-2xl border p-8 shadow-md'>
       <h3 className='text-h3 mb-6 flex items-center gap-2 font-bold'>
@@ -25,10 +30,12 @@ export default function OrderSummary({ subtotal, envio, servicio, total }: Props
           <span className='text-fn2'>Sub Total</span>
           <span className='text-lg font-semibold'>S/ {subtotal.toFixed(2)}</span>
         </div>
+
         <div className='flex items-center justify-between'>
           <span className='text-fn2'>Gasto de Envío</span>
           <span className='text-lg font-semibold'>S/ {envio.toFixed(2)}</span>
         </div>
+
         <div className='text-tn1 flex items-center justify-between'>
           <span className='font-medium'>Descuento de Servicio</span>
           <span className='text-lg font-semibold'>- S/ {servicio.toFixed(2)}</span>
@@ -42,11 +49,12 @@ export default function OrderSummary({ subtotal, envio, servicio, total }: Props
         </div>
       </div>
 
-      <Link href='/payment-cart'>
-        <button className='bg-tn1 text-fnA mb-3 w-full rounded-xl py-4 text-lg font-bold shadow-md transition-opacity hover:opacity-90'>
-          Procesar Pago
-        </button>
-      </Link>
+      <button
+        className='bg-tn1 text-fnA mb-3 w-full rounded-xl py-4 text-lg font-bold shadow-md transition-opacity hover:opacity-90'
+        onClick={handlePayment}
+      >
+        Procesar Pago
+      </button>
 
       <button className='border-tn1 text-tn1 hover:bg-tn1 hover:text-fnA w-full rounded-xl border-2 py-4 font-bold transition-all'>
         Descuento (NUEVO)
