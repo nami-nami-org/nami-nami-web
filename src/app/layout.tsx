@@ -9,15 +9,15 @@ import type { FC, ReactNode } from 'react'
 import { Toaster } from 'sonner'
 
 import { globalMetadata as metadata, viewport } from '../shared/config/metadata/global.metadata'
-import Providers from './Providers'
 import './global-themes.css'
 import './globals.css'
+import Providers from './providers'
 
 interface Props {
   children?: ReactNode | ReactNode[]
 }
 
-const Bootstrap: FC<Props> = ({ children }) => {
+const Bootstrap: FC<Props> = async ({ children }) => {
   return (
     <ViewTransitions>
       <html lang='es' className='no-scrollbar' data-lt-installed='true' suppressHydrationWarning>
