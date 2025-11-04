@@ -1,5 +1,4 @@
 import nami_api from './root.service'
-import lex_api from './root.service'
 
 interface NewUserPayload {
   email: string
@@ -10,7 +9,8 @@ async function login(payload: NewUserPayload) {
   try {
     const res = await nami_api.post('/auth/login', payload, {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        credentials: 'include'
       }
     })
     return res.data
@@ -29,7 +29,7 @@ interface User {
 
 async function createUser(payload: User) {
   try {
-    const res = await lex_api.post('/auth/register', payload, {
+    const res = await nami_api.post('/auth/register', payload, {
       headers: { 'Content-Type': 'application/json' }
     })
     return res.data
@@ -39,7 +39,50 @@ async function createUser(payload: User) {
   }
 }
 
+async function refreshToken() {
+  try {
+    const res = await nami_api.post('/auth/refresh')
+    return res.data
+  } catch (err: any) {
+    console.log('err', err)
+    const message = err.response?.data?.message || err.message || 'Error al refrescar token'
+    throw new Error(message)
+  }
+}
+
+async function me() {
+  try {
+    const res = await nami_api.get('/auth/me')
+    return res.status === 200
+  } catch (err: any) {
+    console.log('err', err)
+    const message = err.response?.data?.message || err.message || 'Error al validar el usuario'
+    throw new Error(message)
+  }
+}
+
+export async function meSessionToken(token: string) {
+  try {
+    const res = await nami_api.get('/auth/me', {
+      method: 'GET',
+      fetchOptions: { cache: 'no-store' },
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    return res
+  } catch (err: any) {
+    if (err.response?.status !== 401) console.error('Error inesperado al validar la sesión:', err.message)
+    return null
+  }
+}
+
 export const userService = {
   login,
-  createUser
+  createUser,
+  refreshToken,
+  me
 }
