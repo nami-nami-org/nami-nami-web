@@ -1,10 +1,10 @@
+import { useCartStore } from '@/core/store/shopping-cart.store'
 import Button from '@/shared/ui/components/Button'
 import StarRating from '@/shared/ui/components/StarRating'
 import { Image } from '@unpic/react'
 import { EyeIcon, ShoppingCartIcon } from 'lucide-react'
 import Link from 'next/link'
 import { FC } from 'react'
-import { useCartStore } from '@/core/store/shopping_cart.store'
 
 interface DishCardProps {
   name: string
@@ -16,14 +16,7 @@ interface DishCardProps {
   price: number
 }
 
-const BigDishCard: FC<DishCardProps> = ({
-  name,
-  description,
-  discount,
-  imageUrl,
-  prepTime,
-  price,
-}) => {
+const BigDishCard: FC<DishCardProps> = ({ name, description, discount, imageUrl, prepTime, price }) => {
   const addToCart = useCartStore(state => state.addToCart)
 
   const handleAddToCart = () => {
@@ -34,7 +27,7 @@ const BigDishCard: FC<DishCardProps> = ({
       time: prepTime.toString(),
       price,
       quantity: 1,
-      image: imageUrl,
+      image: imageUrl
     })
   }
 

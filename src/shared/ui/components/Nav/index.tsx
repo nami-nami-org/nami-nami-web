@@ -1,5 +1,6 @@
 'use client'
 
+import { useCartStore } from '@/core/store/shopping-cart.store'
 import { ChevronDown, ShoppingCartIcon, UserIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC } from 'react'
@@ -7,9 +8,9 @@ import type { FC } from 'react'
 import Button from '../Button'
 import Logo from '../Logo'
 import ThemeChanger from '../ThemeChanger'
+import UserButton from '../UserButton'
 import NavLinks from './NavLinks'
 import NavMenu from './NavMenu'
-import { useCartStore } from '@/core/store/shopping_cart.store'
 
 const Nav: FC = () => {
   const itemsCount = useCartStore(state => state.getItemsCount())
@@ -39,23 +40,18 @@ const Nav: FC = () => {
           <ThemeChanger />
           <NavMenu />
 
-          <Link href='/shopping_cart'>
+          <Link href='/shopping-cart'>
             <Button asClass variant='border' className='relative'>
               <ShoppingCartIcon />
               {itemsCount > 0 && (
-                <span className='absolute -top-2 -right-2 bg-tn1 text-white text-xs font-bold rounded-full px-2 py-0.5'>
+                <span className='bg-tn1 absolute -top-2 -right-2 rounded-full px-2 py-0.5 text-xs font-bold text-white'>
                   {itemsCount}
                 </span>
               )}
             </Button>
           </Link>
 
-          <Link href='/login'>
-            <Button asClass variant='active'>
-              <UserIcon />
-              <h4 className='text-fnA block'>Iniciar sesión</h4>
-            </Button>
-          </Link>
+          <UserButton />
         </div>
       </div>
     </header>
