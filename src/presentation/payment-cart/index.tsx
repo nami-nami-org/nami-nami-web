@@ -3,15 +3,17 @@
 import { useCartStore } from '@/core/store/shopping_cart.store'
 import CartHeader from '@/presentation/shopping_cart/components/CartHeader'
 import { AlertCircle, ShoppingCart } from 'lucide-react'
+import React from 'react'
 
 export default function CarritoPage() {
   const { items: cartItems } = useCartStore()
 
-  // Si el carrito está vacío
+  // Estado: carrito vacío
   if (cartItems.length === 0) {
     return (
       <div className='bg-bg1 min-h-screen'>
         <CartHeader activeStep={2} />
+
         <div className='text-fn2 flex flex-col items-center justify-center py-20 text-center'>
           <ShoppingCart className='text-tn1 mb-4 h-12 w-12' />
           <p className='text-lg font-semibold'>Tu carrito está vacío.</p>
@@ -21,7 +23,7 @@ export default function CarritoPage() {
     )
   }
 
-  // Cálculos
+  // Cálculos del pedido
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
   const igv = subtotal * 0.18
   const shippingCost = 5.0
@@ -30,8 +32,10 @@ export default function CarritoPage() {
 
   return (
     <div className='bg-bg1 min-h-screen'>
+      {/* Cabecera */}
       <CartHeader activeStep={2} />
 
+      {/* Contenido */}
       <div className='flex justify-center px-4 py-10 md:px-8'>
         <div className='bg-bg2 border-bg3 w-full max-w-2xl rounded-2xl border p-8 shadow-lg'>
           {/* Encabezado */}
@@ -63,23 +67,23 @@ export default function CarritoPage() {
 
           {/* Totales */}
           <div className='border-bg3 mb-6 space-y-3 border-t pt-4 text-sm'>
-            <div className='flex justify-between'>
+            <div className='flex items-center justify-between'>
               <span className='text-fn2'>Subtotal</span>
               <span className='text-fn1 font-semibold'>S/ {subtotal.toFixed(2)}</span>
             </div>
 
-            <div className='bg-tn1/10 border-tn1/20 flex justify-between rounded-lg border px-3 py-2'>
+            <div className='bg-tn1/10 border-tn1/20 flex items-center justify-between rounded-lg border px-3 py-2'>
               <span className='text-fn2'>IGV (18%)</span>
               <span className='text-tn1 font-bold'>S/ {igv.toFixed(2)}</span>
             </div>
 
-            <div className='flex justify-between'>
+            <div className='flex items-center justify-between'>
               <span className='text-fn2'>Costo de Envío</span>
               <span className='text-fn1 font-semibold'>S/ {shippingCost.toFixed(2)}</span>
             </div>
 
             {discountAmount > 0 && (
-              <div className='text-tn1 flex justify-between'>
+              <div className='text-tn1 flex items-center justify-between'>
                 <span>Descuento</span>
                 <span className='font-bold'>- S/ {discountAmount.toFixed(2)}</span>
               </div>
@@ -92,14 +96,14 @@ export default function CarritoPage() {
             <p className='text-h1 text-tn1 font-bold'>S/ {total.toFixed(2)}</p>
           </div>
 
-          {/* Botón */}
-          <button className='bg-tn1 text-fnA w-full rounded-xl py-4 text-lg font-bold shadow-lg transition-opacity duration-200 hover:scale-105 hover:opacity-90 hover:shadow-xl'>
+          {/* Botón principal */}
+          <button className='bg-tn1 text-fnA w-full transform rounded-xl py-4 text-lg font-bold shadow-lg transition-opacity duration-200 hover:scale-105 hover:opacity-90 hover:shadow-xl'>
             Confirmar Pedido
           </button>
 
           {/* Nota */}
           <div className='bg-bg1 border-bg3 mt-6 flex gap-3 rounded-lg border p-4'>
-            <AlertCircle className='text-tn1 mt-0.5 h-5 w-5' />
+            <AlertCircle className='text-tn1 mt-0.5 h-5 w-5 flex-shrink-0' />
             <p className='text-fn2 text-xs leading-relaxed'>
               Tu pedido ha sido registrado correctamente. Recibirás una confirmación por correo o WhatsApp.
             </p>
