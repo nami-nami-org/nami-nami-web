@@ -1,7 +1,6 @@
 'use client'
 
 import { useCartStore } from '@/core/store/shopping-cart.store'
-import CartHeader from '@/presentation/shopping-cart/components/CartHeader'
 import { AlertCircle, ShoppingCart } from 'lucide-react'
 import React from 'react'
 
@@ -12,7 +11,7 @@ export default function CarritoPage() {
   if (cartItems.length === 0) {
     return (
       <div className='bg-bg1 min-h-screen'>
-        <CartHeader activeStep={2} />
+        {/* <CartHeader activeStep={2} /> */}
         <div className='text-fn2 flex flex-col items-center justify-center py-20 text-center'>
           <ShoppingCart className='text-tn1 mb-4 h-12 w-12' />
           <p className='text-lg font-semibold'>Tu carrito está vacío.</p>
@@ -32,7 +31,7 @@ export default function CarritoPage() {
   return (
     <div className='bg-bg1 min-h-screen'>
       {/* Cabecera */}
-      <CartHeader activeStep={2} />
+      {/* <CartHeader activeStep={2} /> */}
 
       {/* Contenido */}
       <div className='flex justify-center px-4 py-10 md:px-8'>

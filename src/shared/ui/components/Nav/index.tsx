@@ -1,7 +1,7 @@
 'use client'
 
 import { useCartStore } from '@/core/store/shopping-cart.store'
-import { ChevronDown, ShoppingCartIcon, UserIcon } from 'lucide-react'
+import { ChevronDown, ShoppingCartIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC } from 'react'
 
