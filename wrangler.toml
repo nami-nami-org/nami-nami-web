@@ -1,0 +1,14 @@
+main = ".open-next/worker.js"
+name = "nami"
+compatibility_date = "2025-03-25"
+compatibility_flags = ["nodejs_compat"]
+
+preview_urls = true
+workers_dev = true
+
+[assets]
+directory = ".open-next/assets"
+binding = "ASSETS"
+
+[vars]
+API_URL = "http://localhost:8080/api/v1"
