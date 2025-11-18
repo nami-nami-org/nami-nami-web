@@ -1,4 +1,4 @@
-name: Deploy OpenNext as Worker
+1name: Deploy OpenNext as Worker
 
 on:
   workflow_dispatch:
@@ -8,25 +8,25 @@ on:
       - dev
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    name: Build OpenNext
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-      - name: Restore Bun cache
+      - name: Restore bun cache
         id: bun-cache
         uses: actions/cache@v3
         with:
           path: ~/.bun
-          key: bun-${{ runner.os }}-${{ hashFiles('**/bun.lockb') }}
+          key: bun-${{ runner.os }}-${{ hashFiles('bun.lockb') }}
           restore-keys: |
             bun-${{ runner.os }}-
 
-      - name: Add Bun to PATH
+      - name: Add bun to PATH
         run: echo "$HOME/.bun/bin" >> $GITHUB_PATH
 
-      - name: Setup Bun (if needed)
+      - name: Setup bun
         if: steps.bun-cache.outputs.cache-hit != 'true'
         uses: oven-sh/setup-bun@v2
         with:
@@ -37,46 +37,16 @@ jobs:
           echo "Bun path: $(which bun || echo 'not found')"
           bun --version || true
 
-      - name: Install dependencies with Bun
+      - name: Install dependencies
         run: bun i
 
       - name: Build OpenNext Worker
         run: bun x opennextjs-cloudflare build
 
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: open-next-build
-          path: .open-next
-          include-hidden-files: true
-          if-no-files-found: error
-          retention-days: 7
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    name: Deploy Worker
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: open-next-build
-          path: .open-next
-
-      - name: Install Wrangler v4
-        run: npm install -g wrangler@4.49.0
-
-      - name: Verify Wrangler version
-        run: wrangler --version
-
       - name: Deploy Worker with Wrangler
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: |
-          # deploy desde la raíz, indicando la carpeta de assets
-          wrangler deploy .open-next/worker.js \
-            --assets .open-next/assets \
-            --var API_URL="http://localhost:8080/api/v1"
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
+          cwd: .open-next
