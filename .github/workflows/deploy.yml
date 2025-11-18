@@ -15,29 +15,28 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      # 1) Restaurar cache de Bun (si existe)
+      # 1) Restaurar cache de Bun
       - name: Restore bun cache
         id: bun-cache
         uses: actions/cache@v3
         with:
           path: ~/.bun
           key: bun-${{ runner.os }}-${{ hashFiles('bun.lockb') }}
-          # restore-keys para mayor probabilidad de hit si el hash cambió levemente
           restore-keys: |
             bun-${{ runner.os }}-
 
-      # 2) Asegurar que ~/.bun/bin esté en PATH (necesario si la cache trajo el binario)
+      # 2) Agregar Bun al PATH (importante si vino desde cache)
       - name: Add bun to PATH
         run: echo "$HOME/.bun/bin" >> $GITHUB_PATH
 
-      # 3) Instalar Bun solo si la cache NO fue encontrada
+      # 3) Instalar Bun si la cache no fue encontrada
       - name: Setup bun (only on cache miss)
         if: steps.bun-cache.outputs.cache-hit != 'true'
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: 1.3.0
 
-      # 4) (Opcional) Ver estado de bun para debugging rápido
+      # 4) Debug rápido
       - name: Bun info
         run: |
           echo "Bun path: $(which bun || echo 'not found')"
@@ -46,13 +45,15 @@ jobs:
       - name: Install dependencies
         run: bun i
 
+      # 5) Build REAL de OpenNext para Cloudflare
       - name: Build OpenNext Worker
-        run: bun run build
+        run: bun x opennextjs-cloudflare build
 
+      # 6) Deploy con Wrangler (directorio correcto)
       - name: Deploy Worker with Wrangler
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: deploy
-          cwd: .opennext
+          workingDirectory: .open-next
