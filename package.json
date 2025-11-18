@@ -11,9 +11,10 @@
     "format": "prettier --check .",
     "format:fix": "prettier --write --list-different .",
     "prepare": "husky",
-    "build": "next build --turbopack",
+    "build": "next build",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "tail": " wrangler tail nami",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "lint-staged": {
