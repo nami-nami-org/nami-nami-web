@@ -8,14 +8,13 @@ on:
       - dev
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
-
+    name: Build OpenNext
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      # Restaurar cache de Bun
       - name: Restore bun cache
         id: bun-cache
         uses: actions/cache@v3
@@ -25,11 +24,9 @@ jobs:
           restore-keys: |
             bun-${{ runner.os }}-
 
-      # Agregar Bun al PATH
       - name: Add bun to PATH
         run: echo "$HOME/.bun/bin" >> $GITHUB_PATH
 
-      # Instalar Bun si la cache no fue encontrada
       - name: Setup bun (only on cache miss)
         if: steps.bun-cache.outputs.cache-hit != 'true'
         uses: oven-sh/setup-bun@v2
@@ -40,18 +37,41 @@ jobs:
         run: |
           echo "Bun path: $(which bun || echo 'not found')"
           bun --version || true
+
       - name: Install dependencies
         run: bun i
 
-      # Build OpenNext
       - name: Build OpenNext Worker
         run: bun x opennextjs-cloudflare build
 
-      # Deploy Wrangler
-      - name: Deploy Worker with Wrangler
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: open-next-build
+          path: .open-next
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 7
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    name: Deploy Worker
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: open-next-build
+          path: .open-next
+
+      - name: Deploy with Wrangler
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy
-          workingDirectory: .open-next
+          workingDirectory: '.open-next'
+          command: 'deploy --assets . --no-dash-init'
+fix: 🐛 force wrangler deploy without init to avoid from‑dash bug
