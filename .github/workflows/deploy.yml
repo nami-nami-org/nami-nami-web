@@ -1,4 +1,4 @@
-name: Deploy to Cloudflare Pages
+name: Deploy OpenNext as Worker
 
 on:
   workflow_dispatch:
@@ -29,13 +29,13 @@ jobs:
       - name: Install dependencies
         run: bun i
 
-      - name: Build (OpenNext)
+      - name: Build OpenNext Worker
         run: bun run build
 
-      - name: Deploy to Cloudflare Pages (OpenNext)
+      - name: Deploy Worker with Wrangler
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: nami-nami-web
-          directory: .opennext
+          command: deploy
+          cwd: .opennext

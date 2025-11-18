@@ -1,5 +1,4 @@
 import { StateCreator, create } from 'zustand'
-import { persist } from 'zustand/middleware'
 
 interface Props {
   user: any | null
