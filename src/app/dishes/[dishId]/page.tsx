@@ -1,11 +1,10 @@
 import Dish from '@/presentation/dish'
 
 interface DishPageProps {
-  params: { dishId: string }
+  params: Promise<{ dishId: string }>
 }
 
-export default function DishPage({ params }: DishPageProps) {
-  const { dishId } = params
-
+export default async function DishPage({ params }: DishPageProps) {
+  const { dishId } = await params
   return <Dish dishId={dishId} />
 }
