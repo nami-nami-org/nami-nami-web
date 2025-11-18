@@ -1,43 +1,29 @@
 name: Deploy OpenNext as Cloudflare Workers
 
 on:
-  workflow_dispatch:
   push:
-    branches:
-      - main
-      - dev
+    branches: [main, dev]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
 
 jobs:
-  # INSTALACIÓN + BUILD
-  install:
+  # BUILD + UPLOAD
+  build:
     runs-on: ubuntu-latest
+    outputs:
+      artifact-name: open-next-build
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Restore bun cache
-        id: bun-cache
-        uses: actions/cache@v3
-        with:
-          path: ~/.bun
-          key: bun-${{ runner.os }}-${{ hashFiles('bun.lockb') }}
-          restore-keys: |
-            bun-${{ runner.os }}-
-
-      - name: Add bun to PATH
-        run: echo "$HOME/.bun/bin" >> $GITHUB_PATH
-
-      - name: Setup bun (only on cache miss)
-        if: steps.bun-cache.outputs.cache-hit != 'true'
+      - name: Setup bun
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: 1.3.0
-
-      - name: Bun info
-        run: |
-          echo "Bun path: $(which bun || echo 'not found')"
-          bun --version || true
 
       - name: Install dependencies
         run: bun i
@@ -50,17 +36,19 @@ jobs:
         with:
           name: open-next-build
           path: .open-next
+          if-no-files-found: error
+          retention-days: 7
 
   # DEPLOY
   deploy:
-    needs: install
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Download .open-next artifact
+      - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
           name: open-next-build
