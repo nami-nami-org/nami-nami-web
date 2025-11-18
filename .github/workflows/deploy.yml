@@ -24,7 +24,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24.0.0
-          cache: 'bun'
 
       - name: Cache bun
         uses: actions/cache@v3
