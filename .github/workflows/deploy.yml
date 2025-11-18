@@ -1,4 +1,4 @@
-1name: Deploy OpenNext as Worker
+name: Deploy OpenNext as Worker
 
 on:
   workflow_dispatch:
