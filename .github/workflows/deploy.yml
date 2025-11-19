@@ -46,11 +46,14 @@ jobs:
       - name: List .open-next
         run: ls -la .open-next || true
 
+      - name: Install Wrangler 4.47
+        run: bunx npm install -g wrangler@4.47
+
       - name: Deploy Worker with Wrangler
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: deploy
-          workingDirectory: '.'
+          workingDirectory: .open-next
           packageManager: bun
