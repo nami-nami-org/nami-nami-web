@@ -9,6 +9,3 @@ workers_dev = true
 [assets]
 directory = ".open-next/assets"
 binding = "ASSETS"
-
-[vars]
-API_URL = "http://localhost:8080/api/v1"
