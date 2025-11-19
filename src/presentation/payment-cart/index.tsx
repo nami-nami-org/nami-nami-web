@@ -7,19 +7,6 @@ import React from 'react'
 export default function CarritoPage() {
   const { items: cartItems } = useCartStore()
 
-  // Estado: carrito vacío
-  if (cartItems.length === 0) {
-    return (
-      <div className='bg-bg1 min-h-screen'>
-        <div className='text-fn2 flex flex-col items-center justify-center py-20 text-center'>
-          <ShoppingCart className='text-tn1 mb-4 h-12 w-12' />
-          <p className='text-lg font-semibold'>Tu carrito está vacío.</p>
-          <p className='text-fn3 mt-1 text-sm'>Agrega productos para continuar con el pago.</p>
-        </div>
-      </div>
-    )
-  }
-
   // Cálculos del pedido
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
   const igv = subtotal * 0.18

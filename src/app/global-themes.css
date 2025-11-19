@@ -1,26 +1,26 @@
 :root,
 [data-theme='light'],
 html.light {
-  --bg1: #f3dfd8;
-  --bg2: #ffe3d6;
-  --bg3: #ffd0bf;
+  --bg1: #ffffff;
+  --bg2: #f2f2f2;
+  --bg3: #e2e2e2;
 
-  --fn1: #2b2b2b;
-  --fn2: #5c5c5c;
-  --fnA: #f3dfd8;
+  --fn1: #000000;
+  --fn2: #333333;
+  --fnA: #ffffff;
 
   --tn1: #e9493b;
 }
 
 [data-theme='dark'],
 html.dark {
-  --bg1: #1c1513;
-  --bg2: #2b1f1c;
-  --bg3: #3a2a26;
+  --bg1: #000000;
+  --bg2: #1a1a1a;
+  --bg3: #2b2b2b;
 
-  --fn1: #f5f3f1;
-  --fn2: #c5bdb9;
-  --fnA: #ffffff;
+  --fn1: #ffffff;
+  --fn2: #cccccc;
+  --fnA: #000000;
 
   --tn1: #e9493b;
 }

@@ -1,7 +1,7 @@
-"use client";
+'use client'
 
-import RestaurantCard from '@/shared/ui/components/RestaurantCard'
 import { useLocalsQuery } from '@/core/query/locals.query'
+import RestaurantCard from '@/shared/ui/components/RestaurantCard'
 
 export default function Restaurants() {
   const { data: locals, isLoading } = useLocalsQuery.getAllLocals()
@@ -10,17 +10,17 @@ export default function Restaurants() {
 
   return (
     <div className='flex flex-wrap gap-5'>
-      {locals?.map((local) => (
+      {locals?.map(local => (
         <RestaurantCard
           key={local.id}
           id={String(local.id)}
-          image={local.images?.[0] || '/placeholder.jpg'}
-          logo={local.images?.[0] || '/placeholder.jpg'}
-          name={local.local_name}
-          rating={local.average_rating}
-          time={`${local.average_delivery_time} min`}
-          price={`S/ ${local.delivery_cost}`}
-          className="w-[380px]"
+          images={local.imageUrls}
+          logo={local.imageUrls?.[0]}
+          name={local.tradeName || local.localName}
+          rating={local.averageRating}
+          time={`${local.averageDeliveryTime} min`}
+          price={`S/ ${local.deliveryCost}`}
+          className='w-[380px]'
         />
       ))}
     </div>

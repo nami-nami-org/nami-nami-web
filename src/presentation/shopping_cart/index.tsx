@@ -36,7 +36,6 @@ export default function ShoppingCartPage() {
 
   return (
     <div className='bg-bg1 min-h-screen'>
-      <CartHeader />
       <main className='mx-auto max-w-7xl px-4 py-12 md:px-8'>
         <div className='grid grid-cols-1 gap-8 lg:grid-cols-[1fr_400px]'>
           <div className='space-y-8'>
