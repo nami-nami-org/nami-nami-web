@@ -9,8 +9,7 @@ async function login(payload: NewUserPayload) {
   try {
     const res = await nami_api.post('/auth/login', payload, {
       headers: {
-        'Content-Type': 'application/json',
-        credentials: 'include'
+        'Content-Type': 'application/json'
       }
     })
     return res.data
@@ -66,7 +65,6 @@ export async function meSessionToken(token: string) {
     const res = await nami_api.get('/auth/me', {
       method: 'GET',
       fetchOptions: { cache: 'no-store' },
-      withCredentials: true,
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
