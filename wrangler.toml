@@ -9,3 +9,6 @@ workers_dev = true
 [assets]
 directory = ".open-next/assets"
 binding = "ASSETS"
+
+[vars]
+NEXT_PUBLIC_API_URL="http://18.222.199.91:8080/api/v1"
