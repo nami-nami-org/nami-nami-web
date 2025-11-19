@@ -26,7 +26,7 @@ jobs:
       - name: Add bun to PATH
         run: echo "$HOME/.bun/bin" >> $GITHUB_PATH
 
-      - name: Setup bun
+      - name: Setup bun (only if not cached)
         if: steps.bun-cache.outputs.cache-hit != 'true'
         uses: oven-sh/setup-bun@v2
         with:
@@ -43,10 +43,14 @@ jobs:
       - name: Build OpenNext Worker
         run: bun x opennextjs-cloudflare build
 
+      - name: List .open-next
+        run: ls -la .open-next || true
+
       - name: Deploy Worker with Wrangler
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: deploy
-          cwd: .open-next
+          workingDirectory: '.'
+          packageManager: bun
