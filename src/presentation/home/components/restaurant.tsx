@@ -1,94 +1,26 @@
+"use client";
+
 import RestaurantCard from '@/shared/ui/components/RestaurantCard'
+import { useLocalsQuery } from '@/core/query/locals.query' // o tu ruta real
 
 export default function Restaurants() {
-  const restaurants = [
-    {
-      id: '1',
-      image: '/imagenes/burritos texmex.jpeg',
-      logo: '/imagenes/burritos texmex.jpeg',
-      name: 'Nocturnos Tex Mex Surquillo',
-      rating: 4.7,
-      time: '20-35 min',
-      price: 'S/ 14.90'
-    },
-    {
-      id: '2',
-      image: '/imagenes/burritos texmex.jpeg',
-      logo: '/imagenes/burritos texmex.jpeg',
-      name: 'Tex Mex Grill',
-      rating: 4.6,
-      time: '25-40 min',
-      price: 'S/ 18.50'
-    },
-    {
-      id: '3',
-      image: '/imagenes/burritos texmex.jpeg',
-      logo: '/imagenes/burritos texmex.jpeg',
-      name: 'Tex Mex Dulce',
-      rating: 4.9,
-      time: '15-25 min',
-      price: 'S/ 12.00'
-    },
-    {
-      id: '4',
-      image: '/imagenes/burritos texmex.jpeg',
-      logo: '/imagenes/burritos texmex.jpeg',
-      name: 'Tex Mex Grill',
-      rating: 4.6,
-      time: '25-40 min',
-      price: 'S/ 18.50'
-    },
-    {
-      id: '5',
-      image: '/imagenes/burritos texmex.jpeg',
-      logo: '/imagenes/burritos texmex.jpeg',
-      name: 'Tex Mex Dulce',
-      rating: 4.9,
-      time: '15-25 min',
-      price: 'S/ 12.00'
-    },
-    {
-      id: '4',
-      image: '/imagenes/burritos texmex.jpeg',
-      logo: '/imagenes/burritos texmex.jpeg',
-      name: 'Tex Mex Grill',
-      rating: 4.6,
-      time: '25-40 min',
-      price: 'S/ 18.50'
-    },
-    {
-      id: '5',
-      image: '/imagenes/burritos texmex.jpeg',
-      logo: '/imagenes/burritos texmex.jpeg',
-      name: 'Tex Mex Dulce',
-      rating: 4.9,
-      time: '15-25 min',
-      price: 'S/ 12.00'
-    },
-    {
-      id: '4',
-      image: '/imagenes/burritos texmex.jpeg',
-      logo: '/imagenes/burritos texmex.jpeg',
-      name: 'Tex Mex Grill',
-      rating: 4.6,
-      time: '25-40 min',
-      price: 'S/ 18.50'
-    },
-    {
-      id: '5',
-      image: '/imagenes/burritos texmex.jpeg',
-      logo: '/imagenes/burritos texmex.jpeg',
-      name: 'Tex Mex Dulce',
-      rating: 4.9,
-      time: '15-25 min',
-      price: 'S/ 12.00'
-    }
-  ]
+  const { data: locals, isLoading } = useLocalsQuery.getAllLocals()
+
+  if (isLoading) return <p>Cargando locales...</p>
 
   return (
     <div className='flex flex-wrap gap-5'>
-      {restaurants.map((rest, index) => (
-        <RestaurantCard key={index} {...rest} className="w-[380px]" />
+      {locals?.map((local) => (
+        <RestaurantCard
+          key={local.id}
+          image={local.images?.[0] || '/placeholder.jpg'}
+          logo={local.images?.[0] || '/placeholder.jpg'}
+          name={local.local_name}
+          rating={local.average_rating}
+          time={`${local.average_delivery_time} min`}
+          price={`S/ ${local.delivery_cost}`}
+          className="w-[380px]"
+        />
       ))}
     </div>
   )
