@@ -10,7 +10,7 @@ export default function Restaurants() {
 
   return (
     <div className='flex flex-wrap gap-5'>
-      {locals?.map(local => (
+      {locals?.map((local: any) => (
         <RestaurantCard
           key={local.id}
           id={String(local.id)}
