@@ -8,23 +8,28 @@ interface NewUserPayload {
 async function login(payload: NewUserPayload) {
   try {
     const res = await nami_api.post('/auth/login', payload, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
+      headers: { 'Content-Type': 'application/json' }
     })
+
+    const { token } = res.data
+
+    if (typeof window !== 'undefined' && token) {
+      document.cookie = `Nami_Auth_Session=${token}; path=/; max-age=${60 * 60 * 24}; samesite=lax; secure=${process.env.NODE_ENV === 'production'}`
+    }
+
     return res.data
   } catch (err: any) {
-    const message = err.response?.data?.message || err.message || 'Error al crear usuario'
+    const message = err.response?.data?.message || err.message || 'Error al iniciar sesión'
     throw new Error(message)
   }
 }
-
 interface User {
   name: string
   email: string
   password: string
   phone: string
 }
+1
 
 async function createUser(payload: User) {
   try {

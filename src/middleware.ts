@@ -26,6 +26,7 @@ function isPublicPath(path: string): boolean {
 
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get('Nami_Auth_Session')?.value
+  console.log('token', token)
   const path = req.nextUrl.pathname
   const isPublic = isPublicPath(path)
   const isAuthPath = path === '/login' || path === '/register'

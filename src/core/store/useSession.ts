@@ -1,4 +1,5 @@
 import { StateCreator, create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
 interface Props {
   user: any | null
@@ -12,7 +13,7 @@ const state: StateCreator<Props> = set => ({
   clearUser: () => set({ user: null })
 })
 
-// const useSessionStore = create(persist(state, { name: 'nami-user' }))
-const useSessionStore = create(state)
+const useSessionStore = create(persist(state, { name: 'nami-user' }))
+// const useSessionStore = create(state)
 
 export default useSessionStore

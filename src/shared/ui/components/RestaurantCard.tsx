@@ -2,7 +2,6 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import RatingBadge from '@/shared/ui/components/RatingBadge'
-import { Image } from '@unpic/react'
 import Link from 'next/link'
 
 interface RestaurantCardProps {
@@ -20,7 +19,6 @@ export default function RestaurantCard({ id, images, logo, name, rating, time, p
   return (
     <div className={className}>
       <Card className='bg-bg2 border-bg3 hover:bg-bg3 overflow-hidden transition-shadow hover:shadow-lg'>
-        {/* SLIDER */}
         <div className='relative w-full'>
           <Carousel className='w-full'>
             <CarouselContent>
@@ -42,7 +40,6 @@ export default function RestaurantCard({ id, images, logo, name, rating, time, p
           </div>
         </div>
 
-        {/* INFO */}
         <CardContent className='flex items-start gap-3'>
           <img src={logo} alt={name} className='h-12 w-12 rounded-md object-cover' />
 
@@ -56,7 +53,7 @@ export default function RestaurantCard({ id, images, logo, name, rating, time, p
 
         <CardFooter>
           <Button asChild className='w-full'>
-            <Link href={`/restaurants/${id}`}>Ver más detalles</Link>
+            <Link href={`/local/${id}`}>Ver más detalles</Link>
           </Button>
         </CardFooter>
       </Card>

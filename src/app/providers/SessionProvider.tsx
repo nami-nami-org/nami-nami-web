@@ -18,7 +18,9 @@ const SessionProvider: FC<Props> = ({ children, token }) => {
     if (!token?.value || !!user) return
     const fetchSession = async () => {
       try {
-        const sessionResponse = await meSessionToken(token)
+        console.log('token', token)
+        const sessionResponse = await meSessionToken(token.value)
+        console.log('sessionResponse', sessionResponse)
         if (sessionResponse?.status !== 200) throw new Error('Error al cargar los datos del cliente')
 
         setUser(sessionResponse.data)

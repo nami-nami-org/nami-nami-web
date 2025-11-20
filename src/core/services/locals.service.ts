@@ -9,14 +9,12 @@ async function getAllLocals() {
   }
 }
 
-// Obtener 1 local por id (mock)
 async function getLocalById(id: number | string) {
   try {
-    const local = localsMock.find(l => l.id === Number(id))
-    if (!local) throw new Error('Local no encontrado')
-    return local
+    const res = await nami_api.get(`/local/${id}`)
+    return res.data
   } catch (err: any) {
-    const message = err.message || 'Error al obtener local'
+    const message = err?.response?.data?.message || 'Error al obtener local'
     throw new Error(message)
   }
 }
