@@ -1,35 +1,47 @@
-"use client"
+'use client'
+
+import { Button } from '@/components/ui/button'
 
 interface Category {
   name: string
   emoji: string
+  keywords?: string[]
 }
 
 interface CategoryFiltersProps {
   categories: Category[]
-  selectedCategory: string
-  onSelectCategory: (category: string) => void
+  selectedCategories: string[]
+  onToggleCategory: (category: string) => void
 }
 
-export default function CategoryFilters({ categories, selectedCategory, onSelectCategory }: CategoryFiltersProps) {
+export default function CategoryFilters({
+  categories,
+  selectedCategories,
+  onToggleCategory
+}: CategoryFiltersProps) {
   return (
-    <div className="bg-bg1 border-b border-bg3 sticky top-[73px] z-40">
-      <div className="max-w-[1400px] mx-auto px-4 py-4">
-        <div className="flex gap-2 overflow-x-auto no-scrollbar">
-          {categories.map((category) => (
-            <button
-              key={category.name}
-              onClick={() => onSelectCategory(category.name)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-full whitespace-nowrap transition-colors ${
-                selectedCategory === category.name ? "bg-tn1 text-fnA font-medium" : "bg-bg2 text-fn1 hover:bg-bg3"
-              }`}
-            >
-              {category.emoji && <span>{category.emoji}</span>}
-              <span className="text-sm">{category.name}</span>
-            </button>
-          ))}
+    <nav className='bg-bg1 border-bg3 sticky top-[72px] z-40 border-b'>
+      <div className='mx-auto max-w-[1400px] px-4'>
+        <div className='flex gap-2 overflow-x-auto py-4 scrollbar-hide'>
+          {categories.map(category => {
+            const isActive = selectedCategories.includes(category.name)
+            return (
+              <Button
+                key={category.name}
+                onClick={() => onToggleCategory(category.name)}
+                className={`flex-shrink-0 gap-2 rounded-full px-4 py-2 ${
+                  isActive
+                    ? 'bg-tn1 text-white hover:bg-tn1/90'
+                    : 'bg-bg2 text-fn1 hover:bg-bg3'
+                }`}
+              >
+                {category.emoji && <span>{category.emoji}</span>}
+                <span className='text-sm font-medium'>{category.name}</span>
+              </Button>
+            )
+          })}
         </div>
       </div>
-    </div>
+    </nav>
   )
 }

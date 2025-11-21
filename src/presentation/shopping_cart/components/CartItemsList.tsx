@@ -1,81 +1,93 @@
-import { Image } from '@unpic/react'
+import type { Product } from '@/core/store/shopping-cart.store'
 import { Trash2 } from 'lucide-react'
 
-interface CartItem {
-  id: number
-  name: string
-  description: string
-  time: string
-  price: number
-  quantity: number
-  image: string
-}
-
-interface Props {
-  cartItems: CartItem[]
+interface CartItemsListProps {
+  cartItems: Product[] // ✅ Cambiar de CartItem[] a Product[]
   updateQuantity: (id: number, delta: number) => void
   removeItem: (id: number) => void
 }
 
-export default function CartItemsList({ cartItems, updateQuantity, removeItem }: Props) {
-  return (
-    <div>
-      <div className='mb-6 flex items-center justify-between'>
-        <h2 className='text-h2 font-bold'>Tus Platillos</h2>
-        <span className='text-fn2 bg-bg2 rounded-full px-4 py-2 font-medium'>
-          {cartItems.length} {cartItems.length === 1 ? 'item' : 'items'}
-        </span>
+export default function CartItemsList({
+  cartItems,
+  updateQuantity,
+  removeItem
+}: CartItemsListProps) {
+  if (cartItems.length === 0) {
+    return (
+      <div className='bg-bg2 border-bg3 rounded-2xl border p-12 text-center'>
+        <p className='text-fn2 text-lg'>Tu carrito está vacío</p>
+        <p className='text-fn3 mt-2 text-sm'>Agrega algunos platillos deliciosos</p>
       </div>
+    )
+  }
 
-      <div className='space-y-4'>
-        {cartItems.map(item => (
-          <div
-            key={item.id}
-            className='bg-bg2 hover:border-tn2 flex gap-6 rounded-2xl border border-transparent p-6 shadow-sm transition-all hover:shadow-md'
-          >
-            <Image
-              src={item.image || '/placeholder.svg'}
-              alt={item.name}
-              width={112} // 28 * 4 = 112px
-              height={112}
-              className='h-28 w-28 flex-shrink-0 rounded-xl object-cover'
-            />
-            <div className='flex-1'>
-              <div className='mb-2 flex items-start justify-between gap-4'>
-                <div>
-                  <h3 className='font-semibold'>{item.name}</h3>
-                  <p className='text-fn2'>{item.description}</p>
-                  <span className='text-xs text-fn2'>Tiempo: {item.time} min</span>
-                </div>
-                <button
-                  onClick={() => removeItem(item.id)}
-                  className='text-fn2 hover:text-tn1 hover:bg-bg3 rounded-lg p-2 transition-colors'
-                >
-                  <Trash2 className='h-5 w-5' />
-                </button>
+  return (
+    <div className='space-y-4'>
+      <h2 className='text-fn1 mb-4 text-2xl font-bold'>
+        Tus Platillos ({cartItems.length})
+      </h2>
+
+      {cartItems.map((item) => (
+        <div
+          key={item.id}
+          className='bg-bg2 border-bg3 group rounded-xl border p-4 transition-all hover:shadow-md'
+        >
+          <div className='flex items-start gap-4'>
+            {/* Imagen del producto */}
+            <div className='bg-bg3 h-24 w-24 flex-shrink-0 overflow-hidden rounded-lg'>
+              <img
+                src={item.image}
+                alt={item.name}
+                className='h-full w-full object-cover'
+              />
+            </div>
+
+            {/* Información del producto */}
+            <div className='flex flex-1 flex-col justify-between'>
+              <div>
+                <h3 className='text-fn1 mb-1 text-lg font-semibold'>{item.name}</h3>
+                <p className='text-fn2 mb-2 text-sm'>{item.description}</p>
+                <p className='text-fn2 text-xs'>⏱️ Tiempo: {item.time} min</p>
               </div>
-              <div className='mt-4 flex items-center justify-between'>
-                <div className='bg-bg1 border-bg3 flex items-center gap-3 rounded-xl border px-3 py-2'>
+
+              {/* Controles de cantidad y precio */}
+              <div className='mt-3 flex items-center justify-between'>
+                {/* Control de cantidad */}
+                <div className='bg-bg1 border-bg3 flex items-center gap-2 rounded-lg border px-3 py-1.5'>
                   <button
                     onClick={() => updateQuantity(item.id, -1)}
-                    className='text-tn1 font-bold px-2'
+                    className='text-tn1 hover:text-tn1/80 font-bold transition-colors'
                   >
-                    -
+                    −
                   </button>
-                  <span className='font-semibold'>{item.quantity}</span>
+                  <span className='text-fn1 min-w-[2ch] text-center font-semibold'>
+                    {item.quantity}
+                  </span>
                   <button
                     onClick={() => updateQuantity(item.id, 1)}
-                    className='text-tn1 font-bold px-2'
+                    className='text-tn1 hover:text-tn1/80 font-bold transition-colors'
                   >
                     +
                   </button>
                 </div>
-                <span className='text-tn1 text-xl font-bold'>S/ {item.price.toFixed(2)}</span>
+
+                {/* Precio y botón eliminar */}
+                <div className='flex items-center gap-4'>
+                  <p className='text-tn1 text-xl font-bold'>
+                    S/ {(item.price * item.quantity).toFixed(2)}
+                  </p>
+                  <button
+                    onClick={() => removeItem(item.id)}
+                    className='text-fn2 hover:text-red-500 transition-colors'
+                  >
+                    <Trash2 className='h-5 w-5' />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   )
 }

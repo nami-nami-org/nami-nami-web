@@ -3,7 +3,16 @@ import type { NextRequest } from 'next/server'
 
 import { meSessionToken } from './core/services/users.service'
 
-const PUBLIC_PATHS = new Set(['/', '/login', '/register', '/dishes', '/shopping-cart', '/payment-cart'])
+const PUBLIC_PATHS = new Set([
+  '/', 
+  '/login', 
+  '/register', 
+  '/dishes', 
+  '/shopping-cart', 
+  '/payment-cart',
+  '/confirmation-cart' // ✅ AGREGADO
+])
+
 const ID_PATH_REGEX = new RegExp(`^/(?:dishes|restaurants)/\\d+$`)
 const STATIC_FILE_REGEX = /\.(?:svg|png|jpg|jpeg|gif|webp|ico|css|js|woff2?|ttf|eot|map)$/
 

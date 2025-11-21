@@ -1,6 +1,5 @@
 "use client"
 import React from "react"
-import { CreditCard, Smartphone, MapPin } from "lucide-react"
 
 interface Props {
   selectedPayment: string | null
@@ -24,60 +23,37 @@ export default function PaymentMethods({ selectedPayment, setSelectedPayment }: 
         >
           <div className="text-3xl mb-2">📱</div>
           <div className="text-sm font-bold">Pago con QR</div>
+          {selectedPayment === "pago-qr" && (
+            <div className="mt-2 text-tn1 text-xs">✓ Seleccionado</div>
+          )}
         </button>
 
         <button
-          onClick={() => setSelectedPayment("pago-efectivo")}
+          onClick={() => setSelectedPayment("pago-tarjeta")}
           className={`p-5 rounded-xl border-2 transition-all ${
-            selectedPayment === "pago-efectivo"
+            selectedPayment === "pago-tarjeta"
               ? "border-tn1 bg-tn1/10 shadow-sm"
               : "border-bg3 hover:border-tn2 hover:bg-bg1"
           }`}
         >
-          <div className="text-3xl mb-2">💵</div>
-          <div className="text-sm font-bold">Pago Efectivo</div>
+          <div className="text-3xl mb-2">💳</div>
+          <div className="text-sm font-bold">Pago con Tarjeta</div>
+          {selectedPayment === "pago-tarjeta" && (
+            <div className="mt-2 text-tn1 text-xs">✓ Seleccionado</div>
+          )}
         </button>
       </div>
 
-      {/* Métodos adicionales */}
-      <div className="space-y-3">
-        <button className="w-full flex items-center justify-between p-4 bg-bg1 rounded-xl hover:bg-bg3 hover:shadow-sm transition-all border border-transparent hover:border-tn2 group">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-bg2 rounded-lg flex items-center justify-center group-hover:bg-tn1/10 transition-colors">
-              <CreditCard className="w-5 h-5 text-tn1" />
-            </div>
-            <span className="text-sm font-semibold">Tarjeta de Crédito / Débito</span>
-          </div>
-        </button>
-
-        <button className="w-full flex items-center justify-between p-4 bg-bg1 rounded-xl hover:bg-bg3 hover:shadow-sm transition-all border border-transparent hover:border-tn2 group">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-bg2 rounded-lg flex items-center justify-center group-hover:bg-tn1/10 transition-colors">
-              <Smartphone className="w-5 h-5 text-tn1" />
-            </div>
-            <span className="text-sm font-semibold">Banca Móvil / Pago en Línea</span>
-          </div>
-        </button>
-
-        <button className="w-full flex items-center justify-between p-4 bg-bg1 rounded-xl hover:bg-bg3 hover:shadow-sm transition-all border border-transparent hover:border-tn2 group">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-bg2 rounded-lg flex items-center justify-center group-hover:bg-tn1/10 transition-colors">
-              <span className="text-xl">💜</span>
-            </div>
-            <span className="text-sm font-semibold">Yape</span>
-          </div>
-          <span className="text-tn1 text-sm font-bold">Ligar</span>
-        </button>
-
-        <button className="w-full flex items-center justify-between p-4 bg-bg1 rounded-xl hover:bg-bg3 hover:shadow-sm transition-all border border-transparent hover:border-tn2 group">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-bg2 rounded-lg flex items-center justify-center group-hover:bg-tn1/10 transition-colors">
-              <MapPin className="w-5 h-5 text-tn1" />
-            </div>
-            <span className="text-sm font-semibold">Envío Local</span>
-          </div>
-        </button>
-      </div>
+      {/* Mensaje de método seleccionado */}
+      {selectedPayment && (
+        <div className="bg-tn1/10 border-tn1/30 border rounded-xl p-4">
+          <p className="text-fn1 text-sm font-semibold">
+            {selectedPayment === "pago-qr" 
+              ? "📱 Pagarás con código QR" 
+              : "💳 Pagarás con tarjeta de crédito/débito"}
+          </p>
+        </div>
+      )}
     </div>
   )
 }

@@ -1,113 +1,104 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { Clock, MapPin, Star } from 'lucide-react'
+import { Checkbox } from '@/components/ui/checkbox'
 
 interface SortOption {
   name: string
   emoji: string
 }
 
-interface CompanySize {
+interface Category {
   name: string
   emoji: string
+  keywords?: string[]
 }
 
 interface FilterPanelProps {
   sortOptions: SortOption[]
-  companySize: CompanySize[]
+  categories: Category[]
   selectedSort: string
   onSelectSort: (sort: string) => void
-  selectedCompanySize: string
-  onSelectCompanySize: (size: string) => void
+  selectedCategories: string[]
+  onToggleCategory: (category: string) => void
+  minRating: number
+  onMinRatingChange: (rating: number) => void
+  maxTime: number
+  onMaxTimeChange: (time: number) => void
 }
 
 export default function FilterPanel({
   sortOptions,
-  companySize,
+  categories,
   selectedSort,
   onSelectSort,
-  selectedCompanySize,
-  onSelectCompanySize
+  selectedCategories,
+  onToggleCategory,
 }: FilterPanelProps) {
+  const handleSortChange = (sortName: string) => {
+    if (selectedSort === sortName) {
+      onSelectSort('Más reseñas')
+    } else {
+      onSelectSort(sortName)
+    }
+  }
+
+  // Validación de seguridad
+  if (!categories || !sortOptions) {
+    return null
+  }
+
   return (
     <aside className='hidden w-[240px] flex-shrink-0 lg:block'>
-      <Card className='bg-bg2 border-bg3 sticky top-[180px] rounded-xl p-4'>
+      <Card className='bg-bg2 border-bg3 sticky top-[180px] max-h-[calc(100vh-200px)] overflow-y-auto rounded-xl p-4'>
         <h3 className='text-fn1 mb-4 font-bold'>Panel de filtros</h3>
 
-        {/* ⭐ Orden rápido */}
-        <section className='mb-6 space-y-2'>
-          <h4 className='text-fn1 mb-2 text-sm font-semibold'>Ordenar</h4>
-
-          <Button variant='ghost' className='text-fn1 hover:bg-bg3 w-full justify-start gap-2'>
-            <Star className='h-4 w-4 fill-current' />
-            <span className='text-sm'>4.5+</span>
-          </Button>
-
-          <Button variant='ghost' className='text-fn1 hover:bg-bg3 w-full justify-start gap-2'>
-            <Clock className='h-4 w-4' />
-            <span className='text-sm'>1 hora</span>
-          </Button>
-        </section>
-
-        {/* 📍 Cercanos */}
+        {/* 🗂 Categorías */}
         <section className='mb-6'>
-          <Button variant='ghost' className='text-fn1 hover:bg-bg3 w-full justify-start gap-2'>
-            <MapPin className='h-4 w-4' />
-            <span className='text-sm font-medium'>Cercanos</span>
-          </Button>
+          <h4 className='text-fn1 mb-3 text-sm font-semibold'>Categorías</h4>
+
+          <div className='space-y-3'>
+            {categories.map(category => {
+              const isChecked = selectedCategories.includes(category.name)
+              return (
+                <label
+                  key={category.name}
+                  className='flex items-center gap-2 cursor-pointer hover:bg-bg3 rounded-lg px-2 py-1.5 transition-colors'
+                >
+                  <Checkbox
+                    checked={isChecked}
+                    onCheckedChange={() => onToggleCategory(category.name)}
+                  />
+                  {category.emoji && <span className='text-base'>{category.emoji}</span>}
+                  <span className='text-fn1 text-sm flex-1'>{category.name}</span>
+                </label>
+              )
+            })}
+          </div>
         </section>
 
         {/* 🔎 Ordenar por */}
-        <section className='mb-6'>
+        <section>
           <h4 className='text-fn1 mb-3 text-sm font-semibold'>Ordenar por</h4>
 
-          <div className='space-y-2'>
+          <div className='space-y-3'>
             {sortOptions.map(option => {
-              const active = selectedSort === option.name
+              const isChecked = selectedSort === option.name
               return (
-                <Button
+                <label
                   key={option.name}
-                  onClick={() => onSelectSort(option.name)}
-                  className={`w-full justify-start gap-2 rounded-lg px-3 py-2 text-left ${
-                    active ? 'bg-tn1 hover:bg-tn1/90 font-medium text-white' : 'hover:bg-bg3 text-fn1 bg-transparent'
-                  }`}
+                  className='flex items-center gap-2 cursor-pointer hover:bg-bg3 rounded-lg px-2 py-1.5 transition-colors'
                 >
-                  <span>{option.emoji}</span>
-                  <span className='text-sm'>{option.name}</span>
-                </Button>
+                  <Checkbox
+                    checked={isChecked}
+                    onCheckedChange={() => handleSortChange(option.name)}
+                  />
+                  <span className='text-base'>{option.emoji}</span>
+                  <span className='text-fn1 text-sm flex-1'>{option.name}</span>
+                </label>
               )
             })}
           </div>
-        </section>
-
-        {/* 🏢 Tamaño de empresa */}
-        <section className='mb-6'>
-          <h4 className='text-fn1 mb-3 text-sm font-semibold'>Tamaño de empresa</h4>
-
-          <div className='grid grid-cols-2 gap-2'>
-            {companySize.map(size => {
-              const active = selectedCompanySize === size.name
-              return (
-                <Button
-                  key={size.name}
-                  onClick={() => onSelectCompanySize(size.name)}
-                  className={`text-fn1 flex items-center gap-1 rounded-lg px-2 py-2 ${
-                    active ? 'bg-tn1 font-medium text-white' : 'hover:bg-bg3 bg-transparent'
-                  }`}
-                >
-                  <span className='text-base'>{size.emoji}</span>
-                  <span className='text-xs'>{size.name}</span>
-                </Button>
-              )
-            })}
-          </div>
-        </section>
-
-        {/* 🗂 Categorías */}
-        <section>
-          <h4 className='text-fn1 text-sm font-semibold'>Categorías</h4>
         </section>
       </Card>
     </aside>
