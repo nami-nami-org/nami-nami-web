@@ -1,7 +1,7 @@
 import LocalView from './LocalView'
 
 interface LocalPageProps {
-  params: Promise<{ localId: string }>
+  params: { localId: string }
 }
 
 export default async function LocalPage({ params }: LocalPageProps) {

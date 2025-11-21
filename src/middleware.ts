@@ -8,12 +8,14 @@ const PUBLIC_PATHS = new Set([
   '/login', 
   '/register', 
   '/dishes', 
+  '/local',              // ✅ AGREGADO - Lista de locales
   '/shopping-cart', 
   '/payment-cart',
-  '/confirmation-cart' // ✅ AGREGADO
+  '/confirmation-cart'
 ])
 
-const ID_PATH_REGEX = new RegExp(`^/(?:dishes|restaurants)/\\d+$`)
+const ID_PATH_REGEX = new RegExp(`^/(?:dishes|restaurants|local)/\\d+$`) // ✅ AGREGADO 'local'
+
 const STATIC_FILE_REGEX = /\.(?:svg|png|jpg|jpeg|gif|webp|ico|css|js|woff2?|ttf|eot|map)$/
 
 function shouldSkipAuth(pathname: string): boolean {
