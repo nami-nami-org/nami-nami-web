@@ -2,10 +2,13 @@
 
 import { useCartStore } from '@/core/store/shopping-cart.store'
 import { AlertCircle, ShoppingCart } from 'lucide-react'
+import Link from 'next/link'
 import React from 'react'
+import { toast } from 'sonner'
 
 export default function CarritoPage() {
   const { items: cartItems } = useCartStore()
+  const { clearCart } = useCartStore()
 
   // Cálculos del pedido
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
@@ -77,9 +80,12 @@ export default function CarritoPage() {
           </div>
 
           {/* Botón principal */}
-          <button className='bg-tn1 text-fnA w-full transform rounded-xl py-4 text-lg font-bold shadow-lg transition-opacity duration-200 hover:scale-105 hover:opacity-90 hover:shadow-xl'>
+          <Link href={"/"} onClick={() => {
+            toast.success("Pedido confirmado con éxito!")
+            clearCart()
+          }}  className='bg-tn1 text-fnA w-full transform rounded-xl py-4 text-lg font-bold shadow-lg transition-opacity duration-200 hover:scale-105 hover:opacity-90 hover:shadow-xl'>
             Confirmar Pedido
-          </button>
+          </Link>
 
           {/* Nota */}
           <div className='bg-bg1 border-bg3 mt-6 flex gap-3 rounded-lg border p-4'>

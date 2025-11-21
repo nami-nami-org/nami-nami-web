@@ -1,8 +1,10 @@
 "use client"
 
 import { useDishesQuery } from '@/core/query/dishes.query'
+import { useCartStore } from '@/core/store/shopping-cart.store'
 import StarRating from '@/shared/ui/components/StarRating'
 import { Image } from '@unpic/react'
+import { add } from 'date-fns'
 import { Clock, Heart, Info, MapPin, ShoppingCart } from 'lucide-react'
 import type { FC } from 'react'
 
@@ -12,10 +14,10 @@ interface Props {
 
 const DishDetails: FC<Props> = ({ dishId }) => {
   const { data: dish } = useDishesQuery.getDishById(dishId)
+  const { addToCart } = useCartStore()
 
   if (!dish) return <p className="text-fn2">🍽️ Cargando plato...</p>
   if (!dishId) return <p className="text-fn2">🍽️ ID de plato no válido</p>
-
   return (
     <div className='grid gap-8 lg:grid-cols-2'>
       {/* Image Section */}
@@ -145,7 +147,17 @@ const DishDetails: FC<Props> = ({ dishId }) => {
               <span className='text-xl'>+</span>
             </button>
           </div>
-          <button className='bg-tn1 text-fnA flex flex-1 items-center justify-center gap-2 rounded-full py-4 font-semibold transition-opacity hover:opacity-90'>
+          <button className='bg-tn1 text-fnA flex flex-1 items-center justify-center gap-2 rounded-full py-4 font-semibold transition-opacity hover:opacity-90' onClick={() => {
+              addToCart({
+                id: dish.id,
+                name: dish.name,
+                price: dish.price,
+                description: dish.description,
+                quantity: 1,
+                image: dish.imageUrl,
+                time: dish.prepTime
+              })
+          }}>
             <ShoppingCart className='h-5 w-5' />
             <span>Agregar al carrito</span>
           </button>

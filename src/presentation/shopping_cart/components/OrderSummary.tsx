@@ -55,10 +55,7 @@ export default function OrderSummary({ subtotal, envio, servicio, total }: Props
       >
         Procesar Pago
       </button>
-
-      <button className='border-tn1 text-tn1 hover:bg-tn1 hover:text-fnA w-full rounded-xl border-2 py-4 font-bold transition-all'>
-        Descuento (NUEVO)
-      </button>
+ 
 
       <p className='text-fn2 mt-4 text-center text-xs leading-relaxed'>Al procesar, aceptas nuestros términos y condiciones</p>
     </div>

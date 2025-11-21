@@ -40,7 +40,6 @@ export default function ShoppingCartPage() {
         <div className='grid grid-cols-1 gap-8 lg:grid-cols-[1fr_400px]'>
           <div className='space-y-8'>
             <CartItemsList cartItems={items} updateQuantity={updateQuantity} removeItem={removeItem} />
-            <DiscountSection discountCode={discountCode} setDiscountCode={setDiscountCode} />
             <RecommendedDishes />
           </div>
 
