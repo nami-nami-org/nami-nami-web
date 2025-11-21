@@ -1,6 +1,7 @@
 'use client'
 
 import { useCartStore } from '@/core/store/shopping-cart.store'
+import { Settings } from 'lucide-react'
 import { ChevronDown, ShoppingCartIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { FC } from 'react'
@@ -52,6 +53,12 @@ const Nav: FC = () => {
           </Link>
 
           <UserButton />
+
+          <Link href='/userProfile'>
+            <Button asClass variant='border'>
+              <Settings className='h-5 w-5' />
+            </Button>
+          </Link>
         </div>
       </div>
     </header>
