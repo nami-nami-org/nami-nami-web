@@ -24,7 +24,7 @@ export default function CartHeader({ activeStep = 1 }: CartHeaderProps) {
 
           <Link href='/' className='text-fn2 hover:text-tn1 font-medium transition-colors'>
             Volver
-          </Link>
+          </Link> 
         </div>
 
         {/* Progreso */}

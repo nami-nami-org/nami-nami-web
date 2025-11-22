@@ -17,7 +17,8 @@ const Nav: FC = () => {
 
   return (
     <header className='bg-bg2 sticky top-0 z-50 w-full p-3'>
-      <div className='max-region:justify-center region m-auto flex flex-wrap items-center justify-between gap-2.5 max-xl:px-2.5'>
+      <div className='m-auto flex flex-wrap items-center justify-between gap-2.5 max-xl:px-2.5 max-w-[1400px]'>
+        {/* Logo y ubicación */}
         <div className='flex flex-row items-center gap-7'>
           <Link href='/' className='flex items-center gap-2.5'>
             <Logo />
@@ -25,21 +26,24 @@ const Nav: FC = () => {
               Ñami <br /> Ñami
             </h5>
           </Link>
-          <section className='text-fn1 flex flex-col'>
+          <section className='text-fn1 hidden sm:flex flex-col'> {/* ✅ AGREGADO: hidden sm:flex */}
             <span className='text-fn2'>Enviar a:</span>
             <button className='flex items-center gap-1 font-semibold'>
               <h4>Lima</h4>
               <ChevronDown className='h-4 w-4' />
             </button>
           </section>
+        </div>  
+
+        {/* Links de navegación - Solo desktop */}
+        <div className='hidden region:flex'> {/* ✅ AGREGADO: wrapper con hidden region:flex */}
+          <NavLinks />
         </div>
 
-        <NavLinks />
-
+        {/* Acciones de la derecha */}
         <div className='flex items-center gap-4'>
           <ThemeChanger />
-          <NavMenu />
-
+          
           <Link href='/shopping-cart'>
             <Button asClass variant='border' className='relative'>
               <ShoppingCartIcon />
@@ -51,7 +55,11 @@ const Nav: FC = () => {
             </Button>
           </Link>
 
+          {/* UserButton - Solo desktop */}
           <UserButton />
+
+          {/* Menú hamburguesa - Solo mobile */}
+          <NavMenu />
         </div>
       </div>
     </header>

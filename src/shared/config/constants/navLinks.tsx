@@ -5,6 +5,7 @@ const NAVIGATION = {
   globals: [
     { href: '/', label: 'Inicio', icon: HomeIcon, exclude: true },
     { href: '/dishes', label: 'Platillos', icon: () => <Icon iconNode={bowlChopsticks} /> },
+    { href: '/local', label: 'Locales', icon: ChefHatIcon },
   ]
 }
 

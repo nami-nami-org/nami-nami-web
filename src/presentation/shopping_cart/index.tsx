@@ -3,31 +3,14 @@
 import { useCartStore } from '@/core/store/shopping-cart.store'
 import { useState } from 'react'
 
-import CartHeader from './components/CartHeader'
 import CartItemsList from './components/CartItemsList'
-import DiscountSection from './components/DiscountSection'
 import OrderSummary from './components/OrderSummary'
 import PaymentMethods from './components/PaymentMethods'
 import RecommendedDishes from './components/RecommendedDishes'
 
 export default function ShoppingCartPage() {
-  const { items, addToCart, decreaseQuantity, removeFromCart, getTotal } = useCartStore()
-
-  const [discountCode, setDiscountCode] = useState('')
+  const { items, removeFromCart, updateQuantity, getTotal } = useCartStore()
   const [selectedPayment, setSelectedPayment] = useState<string | null>(null)
-
-  const updateQuantity = (id: number, delta: number) => {
-    if (delta > 0) {
-      const product = items.find(item => item.id === id)
-      if (product) addToCart(product)
-    } else {
-      decreaseQuantity(id)
-    }
-  }
-
-  const removeItem = (id: number) => {
-    removeFromCart(id)
-  }
 
   const subtotal = getTotal()
   const shippingCost = 4.4
@@ -39,13 +22,26 @@ export default function ShoppingCartPage() {
       <main className='mx-auto max-w-7xl px-4 py-12 md:px-8'>
         <div className='grid grid-cols-1 gap-8 lg:grid-cols-[1fr_400px]'>
           <div className='space-y-8'>
-            <CartItemsList cartItems={items} updateQuantity={updateQuantity} removeItem={removeItem} />
+            <CartItemsList 
+              cartItems={items} 
+              updateQuantity={updateQuantity} 
+              removeItem={removeFromCart} 
+            />
             <RecommendedDishes />
           </div>
 
           <div className='space-y-6'>
-            <OrderSummary subtotal={subtotal} envio={shippingCost} servicio={serviceFee} total={total} />
-            <PaymentMethods selectedPayment={selectedPayment} setSelectedPayment={setSelectedPayment} />
+            <OrderSummary 
+              subtotal={subtotal} 
+              envio={shippingCost} 
+              servicio={serviceFee} 
+              total={total}
+              selectedPayment={selectedPayment}
+            />
+            <PaymentMethods 
+              selectedPayment={selectedPayment} 
+              setSelectedPayment={setSelectedPayment} 
+            />
           </div>
         </div>
       </main>
