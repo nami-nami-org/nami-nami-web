@@ -11,6 +11,9 @@
 !.yarn/versions
 bun.lock
 
+
+
+
 # testing
 /coverage
 
