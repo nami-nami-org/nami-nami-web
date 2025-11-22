@@ -1,6 +1,7 @@
 'use client'
 
 import useSessionStore from '@/core/store/useSession'
+import { API_URL } from '@/shared/config/constants'
 import { UserIcon, ChevronDown, User, Settings, LogOut } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -13,9 +14,9 @@ const UserButton: FC = () => {
   const { user, clearUser } = useSessionStore()
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
+  const [isLoggingOut, setIsLoggingOut] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
 
-  // Cerrar menú al hacer click afuera
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -27,20 +28,45 @@ const UserButton: FC = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  const handleLogout = () => {
-    clearUser()
-    toast.success('Sesión cerrada correctamente')
+  const handleLogout = async () => {
+    setIsLoggingOut(true)
     setIsOpen(false)
-    router.push('/login')
+
+    try {
+      const response = await fetch(`${API_URL}/api/auth/logout`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+
+      if (!response.ok) {
+        throw new Error('Error al cerrar sesión en el servidor')
+      }
+
+      clearUser()
+      toast.success('Sesión cerrada correctamente')
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error)
+      
+      // Limpiar sesión local de todas formas
+      clearUser()
+      toast.info('Sesión cerrada (sin conexión al servidor)')
+    } finally {
+      setIsLoggingOut(false)
+      router.push('/login')
+      router.refresh()
+    }
   }
 
-  // Si hay usuario → mostrar menú dropdown
   if (user) {
     return (
       <div className='relative' ref={menuRef}>
         <button
           onClick={() => setIsOpen(!isOpen)}
           className='flex items-center gap-2 text-tn1 hover:text-tn1/80 transition font-semibold'
+          disabled={isLoggingOut}
         >
           <UserIcon className='w-5 h-5' />
           <span>{user.name?.split(' ')[0] || 'Usuario'}</span>
@@ -51,10 +77,8 @@ const UserButton: FC = () => {
           />
         </button>
 
-        {/* Dropdown menu */}
         {isOpen && (
           <div className='bg-bg2 border-bg3 absolute right-0 top-full z-50 mt-2 w-64 rounded-xl border shadow-xl'>
-            {/* Header con info del usuario */}
             <div className='border-bg3 border-b p-4'>
               <div className='flex items-center gap-3'>
                 <div className='bg-tn1 flex h-12 w-12 items-center justify-center rounded-full text-lg font-bold text-white'>
@@ -67,7 +91,6 @@ const UserButton: FC = () => {
               </div>
             </div>
 
-            {/* Menu items */}
             <div className='p-2'>
               <Link
                 href='/profile'
@@ -91,10 +114,13 @@ const UserButton: FC = () => {
 
               <button
                 onClick={handleLogout}
-                className='text-red-500 hover:bg-red-50 dark:hover:bg-red-950/20 flex w-full items-center gap-3 rounded-lg px-3 py-2.5 transition-colors'
+                disabled={isLoggingOut}
+                className='text-red-500 hover:bg-red-50 dark:hover:bg-red-950/20 flex w-full items-center gap-3 rounded-lg px-3 py-2.5 transition-colors disabled:opacity-50'
               >
                 <LogOut className='h-4 w-4' />
-                <span className='font-medium'>Cerrar Sesión</span>
+                <span className='font-medium'>
+                  {isLoggingOut ? 'Cerrando...' : 'Cerrar Sesión'}
+                </span>
               </button>
             </div>
           </div>
@@ -103,7 +129,6 @@ const UserButton: FC = () => {
     )
   }
 
-  // Si NO hay usuario → botón de iniciar sesión
   return (
     <Link href='/login'>
       <Button asClass variant='active'>
