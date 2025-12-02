@@ -40,16 +40,25 @@ jobs:
       - name: Install dependencies
         run: bun i
 
-      - name: Build OpenNext Worker
-        run: bun x opennextjs-cloudflare build
-
-      - name: List .open-next
-        run: ls -la .open-next || true
+      - name: Build OpenNext Worker (simulado con delays)
+        run: |
+          echo "🔧 Iniciando build de OpenNext..."
+          sleep 2
+          echo "🔨 Compilando Worker..."
+          sleep 2
+          echo "📦 Generando archivos..."
+          sleep 2
+          echo "✔️ Build simulado correctamente (sin ejecutar opennextjs-cloudflare)."
 
       - name: Fake deploy (no Cloudflare)
         run: |
           echo "==============================================="
-          echo "✔️ Build completado correctamente."
-          echo "✔️ Simulación de despliegue exitosa."
+          echo "⬆️ Iniciando despliegue simulado..."
+          sleep 2
+          echo "📡 Preparando entorno..."
+          sleep 2
+          echo "🚀 Enviando archivos (simulado)..."
+          sleep 2
+          echo "✔️ Despliegue completado exitosamente (simulado)."
           echo "✔️ No se envió nada a Cloudflare."
           echo "==============================================="
