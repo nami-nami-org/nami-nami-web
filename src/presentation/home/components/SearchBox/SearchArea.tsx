@@ -1,8 +1,11 @@
 'use client'
 
+import iaGeneration from '@/core/services/ia.service'
 import Button from '@/shared/ui/components/Button'
 import MentionInput from '@/shared/ui/components/MentionInput'
-import type { FC, KeyboardEvent } from 'react'
+import { useQueryClient } from '@tanstack/react-query'
+import { useRouter } from 'next/navigation'
+import { useEffect, type FC, type KeyboardEvent } from 'react'
 import { toast } from 'sonner'
 
 import { useSearchStore } from '../../store/useSearchStore'
@@ -23,21 +26,47 @@ export const filterOptions = [
 
 const SearchArea: FC = () => {
   const { query, setQuery } = useSearchStore()
+  const queryClient = useQueryClient()
+  const router = useRouter()
 
-  const handleSearch = () => {
-    const { success, data, error } = searchSchema.safeParse({ query })
+  useEffect(() => {
+    router.prefetch('/dishes')
+  }, [router])
 
-    if (!success) {
-      return error.issues.forEach(msg => toast.warning('Búsqueda inválida', { description: msg?.message }))
+  const handleSearch = async () => {
+    const parsed = searchSchema.safeParse({ query })
+
+    if (!parsed.success) {
+      return parsed.error.issues.forEach(issue => toast.warning('Búsqueda inválida', { description: issue.message }))
     }
 
-    toast.success(`Buscando: ${data.query}`)
+    const loadingId = toast.loading('Consultando a la IA...', {
+      description: 'Un momento mientras encontramos tus platillos'
+    })
+
+    try {
+      const data = await iaGeneration(parsed.data.query)
+
+      queryClient.setQueryData(['get-all-dishes'], data)
+
+      toast.success('Platillos listos 🎉', {
+        id: loadingId,
+        description: 'Hemos encontrado sugerencias basadas en tu antojo'
+      })
+
+      router.push('/dishes')
+    } catch (err: any) {
+      toast.error('Error buscando platillos', {
+        id: loadingId,
+        description: err.message
+      })
+    }
   }
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement> | KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = async (e: KeyboardEvent<any>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
-      handleSearch()
+      await handleSearch()
     }
   }
 
@@ -50,13 +79,11 @@ const SearchArea: FC = () => {
         className='text-h3 min-h-[50px] w-[500px] border-none'
         mentionClassName='bg-red-100 border border-bg3'
         onKeyDown={handleKeyDown}
-        renderSuggestion={(suggestion, focused) => {
-          return (
-            <Button key={suggestion.id} className={`w-full ${focused ? 'bg-tn1 text-fnA' : 'bg-bg2 text-fn1'}`}>
-              <h4>{suggestion?.display}</h4>
-            </Button>
-          )
-        }}
+        renderSuggestion={(suggestion, focused) => (
+          <Button key={suggestion.id} className={`w-full ${focused ? 'bg-tn1 text-fnA' : 'bg-bg2 text-fn1'}`}>
+            <h4>{suggestion.display}</h4>
+          </Button>
+        )}
       />
     </div>
   )

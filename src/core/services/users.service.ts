@@ -29,7 +29,6 @@ interface User {
   password: string
   phone: string
 }
-1
 
 async function createUser(payload: User) {
   try {
